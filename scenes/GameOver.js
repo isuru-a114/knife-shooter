@@ -14,7 +14,7 @@ class GameOver extends Phaser.Scene {
 
   preload() {
 
-    this.load.image("bgGameOver", "assets/img/gameOver.png");
+    this.load.image("bgGameOver", "assets/img/GameOver.png");
     // this.load.spritesheet('btn_restart', 'assets/img/btn_try_again_new.png', { frameWidth: 192, frameHeight: 180 });
     // this.load.spritesheet('btn_restart_hover', 'assets/img/btn_try_again_hover_new.png', { frameWidth: 192, frameHeight: 180 });
 
