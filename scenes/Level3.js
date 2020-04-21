@@ -34,12 +34,12 @@ class Level3 extends Phaser.Scene {
 
          //score
          this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
-         this.score_btn.displayHeight = game.config.height / 8.9;;
+         this.score_btn.displayHeight = game.config.height / 10;;
          this.score_btn.displayWidth = game.config.width / 2.4;
  
          //LEVEL
          this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
-         this.score_btn.displayHeight = game.config.height / 8.9;;
+         this.score_btn.displayHeight = game.config.height / 10;;
          this.score_btn.displayWidth = game.config.width / 2.4;
  
          //score 
