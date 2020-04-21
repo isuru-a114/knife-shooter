@@ -6,23 +6,23 @@ var game;
 // global game options
 var gameOptions = {
 
-     // target rotation speed, in degrees per frame
-     rotationSpeed: 3,
+    // target rotation speed, in degrees per frame
+    rotationSpeed: 3,
 
-     // knife throwing duration, in milliseconds
-     throwSpeed: 150,
- 
-     // minimum angle between two knives
-     minAngle: 15,
- 
-     // max rotation speed variation, in degrees per frame
-     rotationVariation: 2,
- 
-     // interval before next rotation speed variation, in milliseconds
-     changeTime: 2000,
- 
-     // maximum rotation speed, in degrees per frame
-     maxRotationSpeed: 6,
+    // knife throwing duration, in milliseconds
+    throwSpeed: 150,
+
+    // minimum angle between two knives
+    minAngle: 15,
+
+    // max rotation speed variation, in degrees per frame
+    rotationVariation: 2,
+
+    // interval before next rotation speed variation, in milliseconds
+    changeTime: 2000,
+
+    // maximum rotation speed, in degrees per frame
+    maxRotationSpeed: 6,
 
     ///////////////////////////////////////////////////////
     // world gravity
@@ -86,15 +86,11 @@ window.onload = function () {
 
         // physics settings
         physics: {
-
-            // we are using Matter JS
-            default: "matter",
-            matter: {
+            default: 'arcade',
+            arcade: {
                 debug: false,
-                // gravity settings
                 gravity: {
-                    x: 0,
-                    y: gameOptions.gravity
+                    y: 0 //the game gravity
                 }
             }
         },
@@ -107,7 +103,7 @@ window.onload = function () {
             Preloader,
             Title,
             Options,
-            PlayGame,
+            Level1,
             Menu,
             GameOver,
             HelpScene,
@@ -116,8 +112,11 @@ window.onload = function () {
             SoundsScene,
             Difficulty,
             CountDown,
-            EasyPlayGame,
-            HardPlayGame,
+            Level2,
+            Level3,
+            Level4,
+            Level5,
+            Level6,
             IntroductionScene]
     }
 

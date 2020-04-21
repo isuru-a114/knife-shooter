@@ -50,10 +50,7 @@ class Menu extends Phaser.Scene {
 
 
         this.input.keyboard.on('keyup', function (e) {
-            if (e.key == "SoftLeft") {
-                //console.log("soft left key");
-                this.goToOptionScene();
-            } else if (e.key == "SoftRight") {
+            if (e.key == "SoftRight") {
                 //console.log("soft right key");
                 this.goToContactScene();
 
@@ -80,18 +77,18 @@ class Menu extends Phaser.Scene {
         // this.text_click_to_play.setFontSize('80px');
 
         // Button PLay
-        this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.5, 'btn_play_hover', 0).setInteractive();
+        this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.8, 'btn_play_hover', 0).setInteractive();
         this.btn_play.displayHeight = game.config.height / 8.9;
         this.btn_play.displayWidth = game.config.width / 2.8;
 
         // Button Score
-        this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.4, 'btn_score', 0).setInteractive();
+        this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.7, 'btn_score', 0).setInteractive();
         this.btn_score.displayHeight = game.config.height / 8.9;
         this.btn_score.displayWidth = game.config.width / 2.8;
 
 
         //Button Help
-        this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.2, 'btn_help', 0).setInteractive();
+        this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.7, 'btn_help', 0).setInteractive();
         this.btn_help.displayHeight = game.config.height / 8.9;
         this.btn_help.displayWidth = game.config.width / 2.8;
 
@@ -101,7 +98,7 @@ class Menu extends Phaser.Scene {
         // this.btn_exit.displayWidth = game.config.width / 2;
 
 
-        this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "About").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
+        this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "About").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
 
         //this.option = this.add.text(game.config.width - game.config.width * 90 / 100, game.config.height - game.config.height * 5 / 100, "Option").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
 
@@ -141,13 +138,6 @@ class Menu extends Phaser.Scene {
             // console.log("DOWN CLICK");
             this.changeMenuButtonWithArrowDown();
         }
-
-
-        if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
-            //console.log("back CLICK");
-            this.goToContactScene();
-        }
-
         // if (Phaser.Input.Keyboard.JustDown(this.key_home)) {
         //     console.log("home CLICK");
         //      this.goToOptionScene();
@@ -169,12 +159,12 @@ class Menu extends Phaser.Scene {
         switch (this.selected_button) {
             case "Play":
                 this.btn_play.destroy();
-                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.5, 'btn_play', 0).setInteractive();
+                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.8, 'btn_play', 0).setInteractive();
                 this.btn_play.displayHeight = game.config.height / 8.9;
                 this.btn_play.displayWidth = game.config.width / 2.8;
 
                 this.btn_score.destroy();
-                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.4, 'btn_score_hover', 0).setInteractive();
+                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.7, 'btn_score_hover', 0).setInteractive();
                 this.btn_score.displayHeight = game.config.height / 8.9;
                 this.btn_score.displayWidth = game.config.width / 2.8;
 
@@ -182,12 +172,12 @@ class Menu extends Phaser.Scene {
                 break;
             case "ScoreScene":
                 this.btn_score.destroy();
-                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.4, 'btn_score', 0).setInteractive();
+                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.7, 'btn_score', 0).setInteractive();
                 this.btn_score.displayHeight = game.config.height / 8.9;
                 this.btn_score.displayWidth = game.config.width / 2.8;
 
                 this.btn_help.destroy();
-                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.2, 'btn_help_hover', 0).setInteractive();
+                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.7, 'btn_help_hover', 0).setInteractive();
                 this.btn_help.displayHeight = game.config.height / 8.9;
                 this.btn_help.displayWidth = game.config.width / 2.8;
 
@@ -195,12 +185,12 @@ class Menu extends Phaser.Scene {
                 break;
             case "Help":
                 this.btn_help.destroy();
-                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.2, 'btn_help', 0).setInteractive();
+                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.7, 'btn_help', 0).setInteractive();
                 this.btn_help.displayHeight = game.config.height / 8.9;
                 this.btn_help.displayWidth = game.config.width / 2.8;
 
                 this.btn_play.destroy();
-                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.5, 'btn_play_hover', 0).setInteractive();
+                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.7, 'btn_play_hover', 0).setInteractive();
                 this.btn_play.displayHeight = game.config.height / 8.9;
                 this.btn_play.displayWidth = game.config.width / 2.8;
                 // this.btn_exit.destroy();
@@ -235,7 +225,7 @@ class Menu extends Phaser.Scene {
         switch (this.selected_button) {
             case "Play":
                 this.btn_play.destroy();
-                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.5, 'btn_play', 0).setInteractive();
+                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.8, 'btn_play', 0).setInteractive();
                 this.btn_play.displayHeight = game.config.height / 8.9;
                 this.btn_play.displayWidth = game.config.width / 2.8;
 
@@ -244,7 +234,7 @@ class Menu extends Phaser.Scene {
                 // this.btn_exit.displayHeight = game.config.height / 9;
                 // this.btn_exit.displayWidth = game.config.width / 2;
                 this.btn_help.destroy();
-                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.2, 'btn_help_hover', 0).setInteractive();
+                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.7, 'btn_help_hover', 0).setInteractive();
                 this.btn_help.displayHeight = game.config.height / 8.9;
                 this.btn_help.displayWidth = game.config.width / 2.8;
 
@@ -252,12 +242,12 @@ class Menu extends Phaser.Scene {
                 break;
             case "ScoreScene":
                 this.btn_score.destroy();
-                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.4, 'btn_score', 0).setInteractive();
+                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.7, 'btn_score', 0).setInteractive();
                 this.btn_score.displayHeight = game.config.height / 8.9;
                 this.btn_score.displayWidth = game.config.width / 2.8;
 
                 this.btn_play.destroy();
-                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.5, 'btn_play_hover', 0).setInteractive();
+                this.btn_play = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 2.8, 'btn_play_hover', 0).setInteractive();
                 this.btn_play.displayHeight = game.config.height / 8.9;
                 this.btn_play.displayWidth = game.config.width / 2.8;
 
@@ -265,12 +255,12 @@ class Menu extends Phaser.Scene {
                 break;
             case "Help":
                 this.btn_help.destroy();
-                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.2, 'btn_help', 0).setInteractive();
+                this.btn_help = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 4.7, 'btn_help', 0).setInteractive();
                 this.btn_help.displayHeight = game.config.height / 8.9;
                 this.btn_help.displayWidth = game.config.width / 2.8;
 
                 this.btn_score.destroy();
-                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.4, 'btn_score_hover', 0).setInteractive();
+                this.btn_score = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 3.7, 'btn_score_hover', 0).setInteractive();
                 this.btn_score.displayHeight = game.config.height / 8.9;
                 this.btn_score.displayWidth = game.config.width / 2.8;
 
@@ -297,7 +287,7 @@ class Menu extends Phaser.Scene {
         switch (this.selected_button) {
             case "Play":
                 //console.log("Play SELECT");
-                this.scene.start("Difficulty")
+                this.scene.start("Level1")
                 break;
             case "ScoreScene":
                 //console.log("ScoreScene SELECT");

@@ -6,8 +6,7 @@ class IntroductionScene  extends Phaser.Scene{
 
     preload(){
         this.load.image("bgIntro", "assets/img/Instructions.png");
-        this.load.image("bgLevels", "assets/img/levels.png");
-        this.load.image("bgGameControls", "assets/img/game_controls.png");
+        this.load.image("bgGameControls", "assets/img/GameControls.png");
 
     }
 
@@ -28,10 +27,7 @@ class IntroductionScene  extends Phaser.Scene{
         this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
         this.input.keyboard.on('keyup', function (e) {
-            if (e.key == "SoftLeft") {
-                //console.log("soft left key");
-
-            } else if (e.key == "SoftRight") {
+             if (e.key == "SoftRight") {
                 //console.log("soft right key");
                 this.goToMenuScene();
             }
@@ -76,13 +72,13 @@ class IntroductionScene  extends Phaser.Scene{
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "controls";
                 break;
-            case "controls":
-                this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgLevels');
-                this.image.displayHeight = game.config.height;
-                this.image.displayWidth = game.config.width;
-                this.selected_screen = "level";
-                break;
+            // case "controls":
+            //     this.image.destroy();
+            //     this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgLevels');
+            //     this.image.displayHeight = game.config.height;
+            //     this.image.displayWidth = game.config.width;
+            //     this.selected_screen = "level";
+            //     break;
             case "level":
                 this.image.destroy();
                 this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgIntro');
@@ -106,13 +102,13 @@ class IntroductionScene  extends Phaser.Scene{
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "level";
                 break;
-            case "level":
-                this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgGameControls');
-                this.image.displayHeight = game.config.height;
-                this.image.displayWidth = game.config.width;
-                this.selected_screen = "controls";
-                break;
+            // case "level":
+            //     this.image.destroy();
+            //     this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgGameControls');
+            //     this.image.displayHeight = game.config.height;
+            //     this.image.displayWidth = game.config.width;
+            //     this.selected_screen = "controls";
+            //     break;
             case "controls":
                 this.image.destroy();
                 this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgIntro');

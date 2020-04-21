@@ -5,15 +5,13 @@ class ContactScene extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image("bgcontact", "assets/img/KnifeShot.png");
+        this.load.image("bgcontact", "assets/img/Contact.png");
     }
 
     create(){
         this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgcontact');
         this.image.displayHeight = game.config.height;
         this.image.displayWidth = game.config.width;
-
-        this.questions = this.add.text(game.config.width/5, game.config.height/10, "Dummy text: Its function as a filler or as a tool\n for comparing the visual impression of different typefaces").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
         //this.contact = this.add.text(game.config.width/2, game.config.height/4, "Contact").setFontSize(80).setFontFamily("Arial").setOrigin(0.5);
         //this.contact.setOrigin(0.5);
@@ -29,7 +27,7 @@ class ContactScene extends Phaser.Scene {
         //this.kaios = this.add.text(game.config.width/2, game.config.height/1.2, "KaiOS ", {font: "80px Impact", color: "#ffffff"});
         //this.kaios.setOrigin(0.5);
 
-        this.goBack = this.add.text(game.config.width - game.config.width*8/100, game.config.height - game.config.height*5/100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
+        this.goBack = this.add.text(game.config.width - game.config.width*8/100, game.config.height - game.config.height*5/100, "Back").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "SoftRight") {

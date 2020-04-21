@@ -203,13 +203,13 @@ class Difficulty extends Phaser.Scene {
         switch (this.selected_button) {
             case "Easy":
                 //console.log("Play SELECT");
-                game.globals.gameDiffculty = "EasyPlayGame";
-                this.scene.start("EasyPlayGame");
+                game.globals.gameDiffculty = "Level1";
+                this.scene.start("Level1");
                 break;
             case "Medium":
                 //console.log("ScoreScene SELECT");
-                game.globals.gameDiffculty = "PlayGame";
-                this.scene.start("PlayGame");
+                game.globals.gameDiffculty = "Level1";
+                this.scene.start("Level1");
                 break;
             case "Hard":
                 //console.log("Option SELECT");

@@ -1,18 +1,19 @@
 // PlayGame scene
-class EasyPlayGame extends Phaser.Scene{
+class Level1 extends Phaser.Scene {
 
     // constructor
-    constructor(){
-        super("EasyPlayGame");
+    constructor() {
+        super("Level1");
     }
 
     // method to be executed when the scene preloads
-    preload(){
+    preload() {
 
         // loading assets
-        this.load.image("playBG","assets/img/Gameplay.png")
+        this.load.image("playBG", "assets/img/Gameplay.png")
         this.load.image("target", "assets/img/target.png");
         this.load.image("knife", "assets/img/knife.png");
+        this.load.image("score", "assets/img/Score-Button.png")
         this.load.spritesheet("apple", "assets/img/apple.png", {
             frameWidth: 70,
             frameHeight: 96
@@ -20,12 +21,29 @@ class EasyPlayGame extends Phaser.Scene{
     }
 
     // method to be executed once the scene has been created
-    create(){
+    create() {
 
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
         this.image.displayHeight = game.config.height;
         this.image.displayWidth = game.config.width;
+
+        //score
+        this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
+        this.score_btn.displayHeight = game.config.height / 8.9;;
+        this.score_btn.displayWidth = game.config.width / 2.4;
+
+        //LEVEL
+        this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
+        this.score_btn.displayHeight = game.config.height / 8.9;;
+        this.score_btn.displayWidth = game.config.width / 2.4;
+
+        //score 
+        this.scroe = 0;
+        scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:0', { fontSize: '70px', fill: '#FFF' });
+
+        //level
+        levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:1', { fontSize: '70px', fill: '#FFF' });
 
         // at the beginning of the game, both current rotation speed and new rotation speed are set to default rotation speed
         this.currentRotationSpeed = gameOptions.rotationSpeed;
@@ -81,10 +99,23 @@ class EasyPlayGame extends Phaser.Scene{
             callbackScope: this,
             loop: true
         });
+
+        //back
+        this.input.keyboard.on('keyup', function (e) {
+            if (e.key == "Backspace") {
+                //console.log("soft right key");
+                this.goBackScene();
+            }
+        }, this);
+    }
+
+    goBackScene() {
+        //console.log("clicked")
+        this.scene.start("Menu");
     }
 
     // method to change the rotation speed of the target
-    changeSpeed(){
+    changeSpeed() {
 
         // ternary operator to choose from +1 and -1
         var sign = Phaser.Math.Between(0, 1) == 0 ? -1 : 1;
@@ -100,10 +131,10 @@ class EasyPlayGame extends Phaser.Scene{
     }
 
     // method to throw a knife
-    throwKnife(){
+    throwKnife() {
 
         // can the player throw?
-        if(this.canThrow){
+        if (this.canThrow) {
 
             // player can't throw anymore
             this.canThrow = false;
@@ -124,7 +155,7 @@ class EasyPlayGame extends Phaser.Scene{
                 callbackScope: this,
 
                 // function to be executed once the tween has been completed
-                onComplete: function(tween){
+                onComplete: function (tween) {
 
                     // at the moment, this is a legal hit
                     var legalHit = true;
@@ -133,10 +164,10 @@ class EasyPlayGame extends Phaser.Scene{
                     var children = this.knifeGroup.getChildren();
 
                     // looping through rotating knives
-                    for (var i = 0; i < children.length; i++){
+                    for (var i = 0; i < children.length; i++) {
 
                         // is the knife too close to the i-th knife?
-                        if(Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, children[i].impactAngle)) < gameOptions.minAngle){
+                        if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, children[i].impactAngle)) < gameOptions.minAngle) {
 
                             // this is not a legal hit
                             legalHit = false;
@@ -146,14 +177,20 @@ class EasyPlayGame extends Phaser.Scene{
                         }
                     }
 
+                    //score
+                    this.scroe += 10;
+                    scoreText.setText('SCORE:'+this.scroe);
+
                     // is this a legal hit?
-                    if(legalHit){
+                    if (legalHit) {
 
                         // is the knife close enough to the apple? And the appls is still to be hit?
-                        if(Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.apple.startAngle)) < gameOptions.minAngle && !this.apple.hit){
+                        if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.apple.startAngle)) < gameOptions.minAngle && !this.apple.hit) {
 
                             // apple has been hit
                             this.apple.hit = true;
+                            this.scroe += 20;
+                            scoreText.setText('SCORE:'+this.scroe);
 
                             // change apple frame to show one slice
                             this.apple.setFrame(1);
@@ -180,7 +217,7 @@ class EasyPlayGame extends Phaser.Scene{
                                 x: {
 
                                     // running a function to get different x ends for each slice according to frame number
-                                    getEnd: function(target, key, value){
+                                    getEnd: function (target, key, value) {
                                         return Phaser.Math.Between(0, game.config.width / 2) + (game.config.width / 2 * (target.frame.name - 1));
                                     }
                                 },
@@ -195,11 +232,11 @@ class EasyPlayGame extends Phaser.Scene{
                                 callbackScope: this,
 
                                 // function to be executed once the tween has been completed
-                                onComplete: function(tween){
+                                // onComplete: function (tween) {
 
-                                    // restart the game
-                                    this.scene.start("PlayGame")
-                                }
+                                //     // restart the game
+                                //     this.scene.start("Level2")
+                                // }
                             });
                         }
 
@@ -218,9 +255,8 @@ class EasyPlayGame extends Phaser.Scene{
                         // bringing back the knife to its starting position
                         this.knife.y = game.config.height / 5 * 4;
                     }
-
                     // in case this is not a legal hit
-                    else{
+                    else {
 
                         // tween to make the knife fall down
                         this.tweens.add({
@@ -241,20 +277,26 @@ class EasyPlayGame extends Phaser.Scene{
                             callbackScope: this,
 
                             // function to be executed once the tween has been completed
-                            onComplete: function(tween){
+                            onComplete: function (tween) {
 
                                 // restart the game
-                                this.scene.start("PlayGame")
+                                this.scene.start("GameOver")
                             }
                         });
                     }
+                    score = this.scroe;
+                    console.log(score);
+                    if (this.scroe >= 100) {
+                        this.scene.start("Level2")
+                    }
+
                 }
             });
         }
     }
 
     // method to be executed at each frame. Please notice the arguments.
-    update(time, delta){
+    update(time, delta) {
 
         // rotating the target
         this.target.angle += this.currentRotationSpeed;
@@ -263,7 +305,7 @@ class EasyPlayGame extends Phaser.Scene{
         var children = this.knifeGroup.getChildren();
 
         // looping through rotating knives
-        for (var i = 0; i < children.length; i++){
+        for (var i = 0; i < children.length; i++) {
 
             // rotating the knife
             children[i].angle += this.currentRotationSpeed;
@@ -277,7 +319,7 @@ class EasyPlayGame extends Phaser.Scene{
         }
 
         // if the apple has not been hit...
-        if(!this.apple.hit){
+        if (!this.apple.hit) {
 
             // adjusting apple rotation
             this.apple.angle += this.currentRotationSpeed;
@@ -302,11 +344,11 @@ function resize() {
     var windowHeight = window.innerHeight;
     var windowRatio = windowWidth / windowHeight;
     var gameRatio = game.config.width / game.config.height;
-    if(windowRatio < gameRatio){
+    if (windowRatio < gameRatio) {
         canvas.style.width = windowWidth + "px";
         canvas.style.height = (windowWidth / gameRatio) + "px";
     }
-    else{
+    else {
         canvas.style.width = (windowHeight * gameRatio) + "px";
         canvas.style.height = windowHeight + "px";
     }
