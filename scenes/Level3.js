@@ -43,7 +43,7 @@ class Level3 extends Phaser.Scene {
          this.score_btn.displayWidth = game.config.width / 2.4;
  
          //score 
-         this.scroe = score;
+         this.score = score;
          scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:'+this.score, { fontSize: '70px', fill: '#FFF' });
  
          //level
@@ -405,7 +405,7 @@ class Level3 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.score >= 300) {
+                    if (this.score >= 350) {
                         this.scene.start("Level4")
                     }
                 }

@@ -542,7 +542,7 @@ class Level5 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.score >= 500) {
+                    if (this.score >= 800) {
                         this.scene.start("Level6")
                     }
                 }
