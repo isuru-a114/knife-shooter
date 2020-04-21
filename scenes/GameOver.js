@@ -32,7 +32,9 @@ class GameOver extends Phaser.Scene {
 
   create() {
 
-    level = 1;
+    this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameOver');
+    this.image.displayHeight = game.config.height;
+    this.image.displayWidth = game.config.width;
 
     //kaiads
     // getKaiAd({
@@ -58,10 +60,6 @@ class GameOver extends Phaser.Scene {
     this.upArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
     this.downArrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
     this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-
-    this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameOver');
-    this.image.displayHeight = game.config.height;
-    this.image.displayWidth = game.config.width;
 
     // this.logo = this.add.image(game.config.width / 2, this.CONFIG.centerY / 4, 'logo');
     // this.logo.displayHeight = game.config.height / 5;
