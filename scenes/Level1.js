@@ -133,6 +133,24 @@ class Level1 extends Phaser.Scene {
     // method to throw a knife
     throwKnife() {
 
+        this.tweens.add({
+            targets: [this.targets],
+            y: game.config.height + this.knife.displayHeight * 2,
+            duration: 500,
+            ease: "Cubic.easeIn",
+            callbackScope: this,
+            onComplete: function () {
+                this.cameras.main.shake(800, 0.01);
+                this.time.addEvent({
+                    delay: 2000,
+                    callbackScope: this,
+                    callback: function () {
+                        console.log('hey')
+                    }
+                })
+            }
+        })
+
         // can the player throw?
         if (this.canThrow) {
 
@@ -179,7 +197,7 @@ class Level1 extends Phaser.Scene {
 
                     //score
                     this.scroe += 10;
-                    scoreText.setText('SCORE:'+this.scroe);
+                    scoreText.setText('SCORE:' + this.scroe);
 
                     // is this a legal hit?
                     if (legalHit) {
@@ -190,7 +208,7 @@ class Level1 extends Phaser.Scene {
                             // apple has been hit
                             this.apple.hit = true;
                             this.scroe += 20;
-                            scoreText.setText('SCORE:'+this.scroe);
+                            scoreText.setText('SCORE:' + this.scroe);
 
                             // change apple frame to show one slice
                             this.apple.setFrame(1);
