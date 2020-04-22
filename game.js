@@ -88,7 +88,7 @@ window.onload = function () {
         physics: {
             default: 'arcade',
             arcade: {
-                debug: false,
+                debug: true,
                 gravity: {
                     y: 0 //the game gravity
                 }
@@ -107,6 +107,7 @@ window.onload = function () {
             HelpScene,
             ContactScene,
             CountDown,
+            SelectLevel,
             Level2,
             Level3,
             Level4,

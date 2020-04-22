@@ -53,6 +53,8 @@ class Level6 extends Phaser.Scene {
         // can the player throw a knife? Yes, at the beginning of the game
         this.canThrow = true;
 
+        this.legal = true;
+
         // group to store all rotating knives
         this.knifeGroup = this.add.group();
 
@@ -74,7 +76,7 @@ class Level6 extends Phaser.Scene {
 
         // adding the apple
         this.apple = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "apple");
-        this.rock = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
+        this.rock = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
 
         // setting apple's anchor point to bottom center
         this.apple.setOrigin(0.5, 1);
@@ -185,10 +187,9 @@ class Level6 extends Phaser.Scene {
                             break;
                         }
                     }
-                    this.legal = true
-
+                    
                     this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false
+                       this.legal = false
                     })
 
                     console.log(this.legal)
@@ -296,13 +297,13 @@ class Level6 extends Phaser.Scene {
                             onComplete: function (tween) {
 
                                 // restart the game
-                                this.scene.start("Level1")
+                                this.scene.start("Level6")
                             }
                         });
                     }
                     console.log(this.scroe)
                     if (this.scroe >= 100) {
-                        this.scene.start("Level2")
+                        this.scene.start("Level6")
                     }
                 }
             });
