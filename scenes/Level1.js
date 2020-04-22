@@ -133,23 +133,23 @@ class Level1 extends Phaser.Scene {
     // method to throw a knife
     throwKnife() {
 
-        this.tweens.add({
-            targets: [this.targets],
-            y: game.config.height + this.knife.displayHeight * 2,
-            duration: 500,
-            ease: "Cubic.easeIn",
-            callbackScope: this,
-            onComplete: function () {
-                this.cameras.main.shake(800, 0.01);
-                this.time.addEvent({
-                    delay: 2000,
-                    callbackScope: this,
-                    callback: function () {
-                        console.log('hey')
-                    }
-                })
-            }
-        })
+        // this.tweens.add({
+        //     targets: [this.targets],
+        //     y: game.config.height + this.knife.displayHeight * 2,
+        //     duration: 500,
+        //     ease: "Cubic.easeIn",
+        //     callbackScope: this,
+        //     onComplete: function () {
+        //         this.cameras.main.shake(800, 0.01);
+        //         this.time.addEvent({
+        //             delay: 2000,
+        //             callbackScope: this,
+        //             callback: function () {
+        //                 console.log('hey')
+        //             }
+        //         })
+        //     }
+        // })
 
         // can the player throw?
         if (this.canThrow) {
