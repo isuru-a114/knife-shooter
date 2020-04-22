@@ -87,6 +87,10 @@ class SelectLevel extends Phaser.Scene {
             if (e.key == "Enter") {
                 //console.log("soft left key");
                 this.callMenuButton();
+            } else if (e.key == "SoftRight" || e.key == "Backspace") {
+                //console.log("soft right key");
+                //this.goToContactScene();
+                this.scene.start("Menu");
             }
         }, this);
 
