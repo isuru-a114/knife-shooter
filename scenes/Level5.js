@@ -11,7 +11,7 @@ class Level5 extends Phaser.Scene {
 
         // loading assets
         this.load.image("playBG", "assets/img/Gameplay.png")
-        this.load.image("target", "assets/img/target.png");
+        // this.load.image("target", "assets/img/target.png");
         this.load.image("knife", "assets/img/knife.png");
         this.load.image("score", "assets/img/Score-Button.png")
         this.load.spritesheet("apple", "assets/img/apple.png", {
@@ -29,6 +29,10 @@ class Level5 extends Phaser.Scene {
         this.load.spritesheet("strawberry", "assets/img/strawberry.png", {
             frameWidth: 70,
             frameHeight: 96
+        });
+        this.load.spritesheet('target', 'assets/img/spritesheet.png', {
+            frameWidth: 306,
+            frameHeight: 306
         });
     }
 
@@ -208,7 +212,7 @@ class Level5 extends Phaser.Scene {
 
                     //score
                     this.score += 10;
-                    scoreText.setText('SCORE:'+this.score);
+                    scoreText.setText('SCORE:' + this.score);
 
                     // is this a legal hit?
                     if (legalHit) {
@@ -219,7 +223,7 @@ class Level5 extends Phaser.Scene {
                             // apple has been hit
                             this.apple.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.apple.setFrame(1);
@@ -276,7 +280,7 @@ class Level5 extends Phaser.Scene {
                             // apple has been hit
                             this.apple2.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.apple2.setFrame(1);
@@ -333,7 +337,7 @@ class Level5 extends Phaser.Scene {
                             // apple has been hit
                             this.orange.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.orange.setFrame(1);
@@ -390,7 +394,7 @@ class Level5 extends Phaser.Scene {
                             // apple has been hit
                             this.pinapple.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.orange.setFrame(1);
@@ -447,7 +451,7 @@ class Level5 extends Phaser.Scene {
                             // apple has been hit
                             this.strawberry.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.orange.setFrame(1);
@@ -543,7 +547,48 @@ class Level5 extends Phaser.Scene {
                     }
                     score = this.score;
                     if (this.score >= 800) {
-                        this.scene.start("Level6")
+                        this.target.setFrame(1, 2);
+                        var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
+                        slice2.displayHeight = 153;
+                        slice2.displayWidth = 153;
+                        slice2.angle = this.target.angle;
+                        slice2.setOrigin(0.5, 1)
+
+                        // break board
+                        this.tweens.add({
+
+                            // adding the knife to tween targets
+                            targets: [this.target, slice2],
+
+                            // y destination
+                            y: game.config.height + this.target.height,
+
+                            // x destination
+                            x: {
+
+                                // running a function to get different x ends for each slice according to frame number
+                                getEnd: function (target, key, value) {
+                                    return Phaser.Math.Between(0, game.config.width / 2) + (game.config.width / 2 * (target.frame.name - 1));
+                                }
+                            },
+
+                            // rotation destination, in radians
+                            angle: 45,
+
+                            // tween duration
+                            duration: gameOptions.throwSpeed * 6,
+
+                            // callback scope
+                            callbackScope: this,
+
+                            // function to be executed once the tween has been completed
+                            // onComplete: function (tween) {
+
+                            //     // restart the game
+                            //     this.scene.start("Level2")
+                            // }
+                        });
+                        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
                     }
                 }
             });

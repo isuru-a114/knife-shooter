@@ -11,7 +11,7 @@ class Level3 extends Phaser.Scene {
 
         // loading assets
         this.load.image("playBG", "assets/img/Gameplay.png")
-        this.load.image("target", "assets/img/target.png");
+        // this.load.image("target", "assets/img/target.png");
         this.load.image("knife", "assets/img/knife.png");
         this.load.image("score", "assets/img/Score-Button.png")
         this.load.spritesheet("apple", "assets/img/apple.png", {
@@ -21,6 +21,10 @@ class Level3 extends Phaser.Scene {
         this.load.spritesheet("orange", "assets/img/orange.png", {
             frameWidth: 70,
             frameHeight: 96
+        });
+        this.load.spritesheet('target', 'assets/img/spritesheet.png', {
+            frameWidth: 306,
+            frameHeight: 306
         });
     }
 
@@ -32,22 +36,22 @@ class Level3 extends Phaser.Scene {
         this.image.displayHeight = game.config.height;
         this.image.displayWidth = game.config.width;
 
-         //score
-         this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
-         this.score_btn.displayHeight = game.config.height / 10;;
-         this.score_btn.displayWidth = game.config.width / 2.4;
- 
-         //LEVEL
-         this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
-         this.score_btn.displayHeight = game.config.height / 10;;
-         this.score_btn.displayWidth = game.config.width / 2.4;
- 
-         //score 
-         this.score = score;
-         scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:'+this.score, { fontSize: '70px', fill: '#FFF' });
- 
-         //level
-         levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:3', { fontSize: '70px', fill: '#FFF' });
+        //score
+        this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
+        this.score_btn.displayHeight = game.config.height / 10;;
+        this.score_btn.displayWidth = game.config.width / 2.4;
+
+        //LEVEL
+        this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
+        this.score_btn.displayHeight = game.config.height / 10;;
+        this.score_btn.displayWidth = game.config.width / 2.4;
+
+        //score 
+        this.score = score;
+        scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:' + this.score, { fontSize: '70px', fill: '#FFF' });
+
+        //level
+        levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:3', { fontSize: '70px', fill: '#FFF' });
 
         // at the beginning of the game, both current rotation speed and new rotation speed are set to default rotation speed
         this.currentRotationSpeed = gameOptions.rotationSpeed;
@@ -185,7 +189,7 @@ class Level3 extends Phaser.Scene {
 
                     //score
                     this.score += 10;
-                    scoreText.setText('SCORE:'+this.score);
+                    scoreText.setText('SCORE:' + this.score);
 
                     // is this a legal hit?
                     if (legalHit) {
@@ -196,7 +200,7 @@ class Level3 extends Phaser.Scene {
                             // apple has been hit
                             this.apple.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.apple.setFrame(1);
@@ -253,7 +257,7 @@ class Level3 extends Phaser.Scene {
                             // apple has been hit
                             this.apple2.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.apple2.setFrame(1);
@@ -303,14 +307,14 @@ class Level3 extends Phaser.Scene {
                             });
                         }
 
-                         //for orange
+                        //for orange
                         // is the knife close enough to the apple? And the appls is still to be hit?
                         if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.orange.startAngle)) < gameOptions.minAngle && !this.orange.hit) {
 
                             // apple has been hit
                             this.orange.hit = true;
                             this.score += 20;
-                            scoreText.setText('SCORE:'+this.score);
+                            scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
                             this.orange.setFrame(1);
@@ -406,11 +410,56 @@ class Level3 extends Phaser.Scene {
                     }
                     score = this.score;
                     if (this.score >= 350) {
-                        this.scene.start("Level4")
+                        this.target.setFrame(1,2);
+                        var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
+                        slice2.displayHeight = 153;
+                        slice2.displayWidth = 153;
+                        slice2.angle = this.target.angle;
+                        slice2.setOrigin(0.5, 1)
+
+                        // break board
+                        this.tweens.add({
+
+                            // adding the knife to tween targets
+                            targets: [this.target, slice2],
+
+                            // y destination
+                            y: game.config.height + this.target.height,
+
+                            // x destination
+                            x: {
+
+                                // running a function to get different x ends for each slice according to frame number
+                                getEnd: function (target, key, value) {
+                                    return Phaser.Math.Between(0, game.config.width / 2) + (game.config.width / 2 * (target.frame.name - 1));
+                                }
+                            },
+
+                            // rotation destination, in radians
+                            angle: 45,
+
+                            // tween duration
+                            duration: gameOptions.throwSpeed * 6,
+
+                            // callback scope
+                            callbackScope: this,
+
+                            // function to be executed once the tween has been completed
+                            // onComplete: function (tween) {
+
+                            //     // restart the game
+                            //     this.scene.start("Level2")
+                            // }
+                        });
+                        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
                     }
                 }
             });
         }
+    }
+
+    onEvent() {
+        this.scene.start("Level4")
     }
 
     // method to be executed at each frame. Please notice the arguments.

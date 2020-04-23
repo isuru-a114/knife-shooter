@@ -11,17 +11,29 @@ class Level1 extends Phaser.Scene {
 
         // loading assets
         this.load.image("playBG", "assets/img/Gameplay.png")
-        this.load.image("target", "assets/img/target.png");
+        // this.load.image("target", "assets/img/target.png");
         this.load.image("knife", "assets/img/knife.png");
         this.load.image("score", "assets/img/Score-Button.png")
         this.load.spritesheet("apple", "assets/img/apple.png", {
             frameWidth: 70,
             frameHeight: 96
         });
+
+        this.load.spritesheet('phaser', 'assets/img/phaser.png', {
+            frameWidth: 70,
+            frameHeight: 90
+        });
+
+        this.load.spritesheet('target', 'assets/img/spritesheet.png', {
+            frameWidth: 306,
+            frameHeight: 306
+        });
+
     }
 
     // method to be executed once the scene has been created
     create() {
+
 
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
@@ -66,6 +78,7 @@ class Level1 extends Phaser.Scene {
 
         // starting apple angle
         var appleAngle = Phaser.Math.Between(0, 360);
+        // var targetAngle = Phaser.Math.Between(0, 360);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -78,6 +91,7 @@ class Level1 extends Phaser.Scene {
 
         // setting apple sprite angle
         this.apple.angle = appleAngle;
+        // this.target.angle = targetAngle;
 
         // saving apple start angle
         this.apple.startAngle = appleAngle;
@@ -305,14 +319,58 @@ class Level1 extends Phaser.Scene {
                     score = this.scroe;
                     console.log(score);
                     if (this.scroe >= 100) {
-                        this.scene.start("Level2")
-                    }
 
+                        this.target.setFrame(1,2);
+                        var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
+                        slice2.displayHeight = 153;
+                        slice2.displayWidth = 153;
+                        slice2.angle = this.target.angle;
+                        slice2.setOrigin(0.5, 1)
+
+                        // break board
+                        this.tweens.add({
+
+                            // adding the knife to tween targets
+                            targets: [this.target, slice2],
+
+                            // y destination
+                            y: game.config.height + this.target.height,
+
+                            // x destination
+                            x: {
+
+                                // running a function to get different x ends for each slice according to frame number
+                                getEnd: function (target, key, value) {
+                                    return Phaser.Math.Between(0, game.config.width / 2) + (game.config.width / 2 * (target.frame.name - 1));
+                                }
+                            },
+
+                            // rotation destination, in radians
+                            angle: 45,
+
+                            // tween duration
+                            duration: gameOptions.throwSpeed * 6,
+
+                            // callback scope
+                            callbackScope: this,
+
+                            // function to be executed once the tween has been completed
+                            // onComplete: function (tween) {
+
+                            //     // restart the game
+                            //     this.scene.start("Level2")
+                            // }
+                        });
+                        this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
+                    }
                 }
             });
         }
     }
 
+    onEvent() {
+        this.scene.start("Level2")
+    }
     // method to be executed at each frame. Please notice the arguments.
     update(time, delta) {
 
