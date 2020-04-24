@@ -66,10 +66,10 @@ class Level10 extends Phaser.Scene {
         this.knifeGroup = this.add.group();
 
         // adding the knife
-        this.knife = this.add.sprite(game.config.width / 2, game.config.height / 5 * 4, "knife");
+        this.knife = this.physics.add.sprite(game.config.width / 2, game.config.height / 5 * 4, "knife");
 
         // adding the target
-        this.target = this.add.sprite(game.config.width / 2, 400, "target");
+        this.target = this.physics.add.sprite(game.config.width / 2, 400, "target");
 
         // moving the target to front
         this.target.depth = 1;

@@ -531,6 +531,21 @@ class SelectLevel extends Phaser.Scene {
                 //this.scene.stop();
                 this.scene.start("Level7")
                 break;
+            case "Level8":
+                //console.log("Exit SELECT");
+                //this.scene.stop();
+                this.scene.start("Level8")
+                break;
+            case "Level9":
+                //console.log("Exit SELECT");
+                //this.scene.stop();
+                this.scene.start("Level9")
+                break;
+            case "Level10":
+                //console.log("Exit SELECT");
+                //this.scene.stop();
+                this.scene.start("Level10")
+                break;
             default:
 
         }
