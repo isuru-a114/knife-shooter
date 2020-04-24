@@ -44,7 +44,7 @@ class Level6 extends Phaser.Scene {
         scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:' + this.score, { fontSize: '70px', fill: '#FFF' });
 
         //level
-        levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:4', { fontSize: '70px', fill: '#FFF' });
+        levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:6', { fontSize: '70px', fill: '#FFF' });
 
         // at the beginning of the game, both current rotation speed and new rotation speed are set to default rotation speed
         this.currentRotationSpeed = gameOptions.rotationSpeed;
@@ -68,8 +68,8 @@ class Level6 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(0, 360);
-        var rockAngle = Phaser.Math.Between(0, 360);
+        var appleAngle = Phaser.Math.Between(90, 360);
+        var rockAngle = Phaser.Math.Between(0, 90);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -189,13 +189,16 @@ class Level6 extends Phaser.Scene {
                     }
                     
                     this.physics.add.overlap(this.knife, this.rock, (e) => {
-                       this.legal = false
+                       this.legal = false;
                     })
 
-                    console.log(this.legal)
+                    console.log(this.legal);
+                    if(this.legal == false){
+                        legalHit = this.legal;
+                    }
 
                     //score
-                    this.scroe += 10;
+                    this.score += 10;
                     scoreText.setText('SCORE:' + this.score);
 
                     // is this a legal hit?
@@ -206,7 +209,7 @@ class Level6 extends Phaser.Scene {
 
                             // apple has been hit
                             this.apple.hit = true;
-                            this.scroe += 20;
+                            this.score += 20;
                             scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
@@ -301,8 +304,8 @@ class Level6 extends Phaser.Scene {
                             }
                         });
                     }
-                    console.log(this.scroe)
-                    if (this.scroe >= 800) {
+                    console.log(this.score)
+                    if (this.score >= 800) {
                         this.scene.start("Level7")
                     }
                 }

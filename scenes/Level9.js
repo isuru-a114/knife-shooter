@@ -59,6 +59,8 @@ class Level9 extends Phaser.Scene {
 
         // can the player throw a knife? Yes, at the beginning of the game
         this.canThrow = true;
+        
+        this.legal = true;
 
         // group to store all rotating knives
         this.knifeGroup = this.add.group();
@@ -73,10 +75,10 @@ class Level9 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(0, 360);
-        var appleAngle2 = Phaser.Math.Between(0, 360);
-        var orangeAngle = Phaser.Math.Between(0, 360);
-        var rockAngle = Phaser.Math.Between(0, 360);
+        var appleAngle = Phaser.Math.Between(90, 360);
+        var appleAngle2 = Phaser.Math.Between(90, 360);
+        var orangeAngle = Phaser.Math.Between(90, 360);
+        var rockAngle = Phaser.Math.Between(0, 90);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -193,6 +195,12 @@ class Level9 extends Phaser.Scene {
                             break;
                         }
                     }
+
+                    this.physics.add.overlap(this.knife, this.rock, (e) => {
+                        this.legal = false;
+                    })
+
+                    legalHit = this.legal;
 
                     //score
                     this.score += 10;

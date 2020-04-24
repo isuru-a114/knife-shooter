@@ -60,6 +60,8 @@ class Level10 extends Phaser.Scene {
         // can the player throw a knife? Yes, at the beginning of the game
         this.canThrow = true;
 
+        this.legal = true;
+
         // group to store all rotating knives
         this.knifeGroup = this.add.group();
 
@@ -73,11 +75,11 @@ class Level10 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(0, 360);
-        var appleAngle2 = Phaser.Math.Between(0, 360);
-        var orangeAngle = Phaser.Math.Between(0, 360);
-        var rockAngle = Phaser.Math.Between(0, 360);
-        var rockAngle2 = Phaser.Math.Between(0, 360);
+        var appleAngle = Phaser.Math.Between(180, 360);
+        var appleAngle2 = Phaser.Math.Between(180, 360);
+        var orangeAngle = Phaser.Math.Between(180, 360);
+        var rockAngle = Phaser.Math.Between(0, 90);
+        var rockAngle2 = Phaser.Math.Between(0, 90);
 
 
         // determing apple angle in radians
@@ -201,6 +203,17 @@ class Level10 extends Phaser.Scene {
                             break;
                         }
                     }
+
+                    this.physics.add.overlap(this.knife, this.rock, (e) => {
+                        this.legal = false;
+                    })
+
+                    this.physics.add.overlap(this.knife, this.rock2, (e) => {
+                        this.legal = false;
+                    })
+
+                    console.log(this.legal);
+                    legalHit = this.legal;
 
                     //score
                     this.score += 10;
@@ -425,7 +438,7 @@ class Level10 extends Phaser.Scene {
                     }
                     score = this.score;
                     if (this.score >= 1100) {
-                        this.target.setFrame(1,2);
+                        this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;
                         slice2.displayWidth = 153;
@@ -542,8 +555,8 @@ class Level10 extends Phaser.Scene {
             this.orange.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
-         // if the rock has not been hit...
-         if (!this.rock.hit) {
+        // if the rock has not been hit...
+        if (!this.rock.hit) {
 
             // adjusting apple rotation
             this.rock.angle += this.currentRotationSpeed;
@@ -556,8 +569,8 @@ class Level10 extends Phaser.Scene {
             this.rock.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
-           // if the rock has not been hit...
-           if (!this.rock2.hit) {
+        // if the rock has not been hit...
+        if (!this.rock2.hit) {
 
             // adjusting apple rotation
             this.rock2.angle += this.currentRotationSpeed;
