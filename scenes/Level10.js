@@ -460,11 +460,11 @@ class Level10 extends Phaser.Scene {
                             callbackScope: this,
 
                             // function to be executed once the tween has been completed
-                            // onComplete: function (tween) {
+                            onComplete: function (tween) {
 
-                            //     // restart the game
-                            //     this.scene.start("Level2")
-                            // }
+                                // restart the game
+                                this.scene.start("GameOver")
+                            }
                         });
                         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
                     }

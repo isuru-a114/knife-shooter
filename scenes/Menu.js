@@ -287,7 +287,7 @@ class Menu extends Phaser.Scene {
         switch (this.selected_button) {
             case "Play":
                 //console.log("Play SELECT");
-                this.scene.start("Level10")
+                this.scene.start("SelectLevel")
                 break;
             case "ScoreScene":
                 //console.log("ScoreScene SELECT");
