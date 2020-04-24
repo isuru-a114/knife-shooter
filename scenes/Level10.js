@@ -79,7 +79,7 @@ class Level10 extends Phaser.Scene {
         var appleAngle2 = Phaser.Math.Between(180, 360);
         var orangeAngle = Phaser.Math.Between(180, 360);
         var rockAngle = Phaser.Math.Between(0, 90);
-        var rockAngle2 = Phaser.Math.Between(0, 90);
+        var rockAngle2 = Phaser.Math.Between(90, 180);
 
 
         // determing apple angle in radians
@@ -201,19 +201,20 @@ class Level10 extends Phaser.Scene {
 
                             // no need to continue with the loop
                             break;
+                        } else {
+                            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                                this.legal = false;
+                            })
+
+                            this.physics.add.overlap(this.knife, this.rock2, (e) => {
+                                this.legal = false;
+                            })
+
+                            console.log(this.legal);
+                            legalHit = this.legal;
                         }
                     }
 
-                    this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false;
-                    })
-
-                    this.physics.add.overlap(this.knife, this.rock2, (e) => {
-                        this.legal = false;
-                    })
-
-                    console.log(this.legal);
-                    legalHit = this.legal;
 
                     //score
                     this.score += 10;

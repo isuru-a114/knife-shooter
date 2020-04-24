@@ -59,17 +59,17 @@ class Level9 extends Phaser.Scene {
 
         // can the player throw a knife? Yes, at the beginning of the game
         this.canThrow = true;
-        
+
         this.legal = true;
 
         // group to store all rotating knives
         this.knifeGroup = this.add.group();
 
         // adding the knife
-        this.knife = this.add.sprite(game.config.width / 2, game.config.height / 5 * 4, "knife");
+        this.knife = this.physics.add.sprite(game.config.width / 2, game.config.height / 5 * 4, "knife");
 
         // adding the target
-        this.target = this.add.sprite(game.config.width / 2, 400, "target");
+        this.target = this.physics.add.sprite(game.config.width / 2, 400, "target");
 
         // moving the target to front
         this.target.depth = 1;
@@ -193,14 +193,15 @@ class Level9 extends Phaser.Scene {
 
                             // no need to continue with the loop
                             break;
+                        } else {
+                            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                                this.legal = false;
+                            })
+
+                            legalHit = this.legal;
                         }
                     }
 
-                    this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false;
-                    })
-
-                    legalHit = this.legal;
 
                     //score
                     this.score += 10;
@@ -425,7 +426,7 @@ class Level9 extends Phaser.Scene {
                     }
                     score = this.score;
                     if (this.score >= 1100) {
-                        this.target.setFrame(1,2);
+                        this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;
                         slice2.displayWidth = 153;
@@ -542,8 +543,8 @@ class Level9 extends Phaser.Scene {
             this.orange.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
-         // if the rock has not been hit...
-         if (!this.rock.hit) {
+        // if the rock has not been hit...
+        if (!this.rock.hit) {
 
             // adjusting apple rotation
             this.rock.angle += this.currentRotationSpeed;
