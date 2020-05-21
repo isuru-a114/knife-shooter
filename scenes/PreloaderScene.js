@@ -82,7 +82,7 @@ class Preloader extends Phaser.Scene {
       callback: () => {
         this.gotoNextScreen();
       },
-      loop: true
+      loop: false
     })
   }
 

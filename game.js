@@ -72,10 +72,10 @@ window.onload = function () {
         type: Phaser.AUTO,
 
         // width of the game, in pixels
-        width: 960,
+        width: 480,
 
         // height of the game, in pixels
-        height: 1280,
+        height: 640,
 
         // background color (black)
         backgroundColor: 0x000000,
@@ -88,7 +88,7 @@ window.onload = function () {
         physics: {
             default: 'arcade',
             arcade: {
-                debug: false,
+                debug: true,
                 gravity: {
                     y: 0 //the game gravity
                 }
@@ -104,6 +104,7 @@ window.onload = function () {
             Level1,
             Menu,
             GameOver,
+            LevelCompleted,
             HelpScene,
             ContactScene,
             CountDown,
@@ -140,7 +141,7 @@ window.onload = function () {
         gameDiffculty: null,
         level: 1,
         ballXposition: game.config.width / 4,
-        ballYposition: game.config.height / 2
+        ballYposition: game.config.height / 2,
     }
 
     // giving focus to the frame (if any) where the game is running in

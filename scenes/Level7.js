@@ -11,16 +11,18 @@ class Level7 extends Phaser.Scene {
 
         // loading assets
         this.load.image("playBG", "assets/img/Gameplay.png")
+        this.load.image("knifebord", "assets/img/KnifeShot.png");
+        this.load.image("knifeshadow", "assets/img/KnifeShotShodow.png");
         this.load.image("rock", "assets/img/rock.png");
         this.load.image("knife", "assets/img/knife.png");
         this.load.image("score", "assets/img/Score-Button.png")
         this.load.spritesheet("apple", "assets/img/apple.png", {
-            frameWidth: 70,
-            frameHeight: 96
+            frameWidth: 35,
+            frameHeight: 48
         });
         this.load.spritesheet('target', 'assets/img/spritesheet.png', {
-            frameWidth: 306,
-            frameHeight: 306
+            frameWidth: 154,
+            frameHeight: 154
         });
     }
 
@@ -34,20 +36,42 @@ class Level7 extends Phaser.Scene {
 
         //score
         this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
-        this.score_btn.displayHeight = game.config.height / 10;;
-        this.score_btn.displayWidth = game.config.width / 2.4;
+        this.score_btn.displayHeight = game.config.height / 14;
+        this.score_btn.displayWidth = game.config.width / 2.8;
 
         //LEVEL
         this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
-        this.score_btn.displayHeight = game.config.height / 10;;
-        this.score_btn.displayWidth = game.config.width / 2.4;
+        this.score_btn.displayHeight = game.config.height / 14;;
+        this.score_btn.displayWidth = game.config.width / 2.8;
+
+        //knife shadow set
+        this.knifeshadowset1 = this.add.sprite(game.config.width / 6, game.config.height / 2, 'knifeshadow');
+        this.knifeshadowset2 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 30, 'knifeshadow');
+        this.knifeshadowset3 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 60, 'knifeshadow');
+        this.knifeshadowset4 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 90, 'knifeshadow');
+        this.knifeshadowset5 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 120, 'knifeshadow');
+        this.knifeshadowset6 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 150, 'knifeshadow');
+        this.knifeshadowset7 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 180, 'knifeshadow');
+
+        //knife set
+        this.knife1 = this.add.sprite(game.config.width / 6, game.config.height / 2, 'knifebord');
+        this.knife2 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 30, 'knifebord');
+        this.knife3 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 60, 'knifebord');
+        this.knife4 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 90, 'knifebord');
+        this.knife5 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 120, 'knifebord');
+        this.knife6 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 150, 'knifebord');
+        this.knife7 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 180, 'knifebord');
+
+        //knife count
+        this.hitknifecount = 7;
 
         //score 
         this.score = score;
-        scoreText = this.add.text(game.config.width / 16, game.config.height / 25, 'SCORE:' + this.score, { fontSize: '70px', fill: '#FFF' });
+        scoreText = this.add.text(game.config.width / 13, game.config.height / 20, 'SCORE:' + this.score, { fontSize: '30px', fill: '#FFF' });
 
         //level
-        levelText = this.add.text(game.config.width / 1.6, game.config.height / 25, 'LEVEL:2', { fontSize: '70px', fill: '#FFF' });
+        game.globals.level = 7;
+        levelText = this.add.text(game.config.width / 1.6, game.config.height / 20, 'LEVEL:' + game.globals.level, { fontSize: '30px', fill: '#FFF' });
 
         // at the beginning of the game, both current rotation speed and new rotation speed are set to default rotation speed
         this.currentRotationSpeed = gameOptions.rotationSpeed;
@@ -65,7 +89,7 @@ class Level7 extends Phaser.Scene {
         this.knife = this.physics.add.sprite(game.config.width / 2, game.config.height / 5 * 4, "knife");
 
         // adding the target
-        this.target = this.physics.add.sprite(game.config.width / 2, 400, "target");
+        this.target = this.physics.add.sprite(game.config.width / 2, 200, "target");
 
         // moving the target to front
         this.target.depth = 1;
@@ -146,6 +170,24 @@ class Level7 extends Phaser.Scene {
 
             // player can't throw anymore
             this.canThrow = false;
+
+            if (this.hitknifecount == 7) {
+                this.knife7.destroy();
+            } else if (this.hitknifecount == 6) {
+                this.knife6.destroy();
+            } else if (this.hitknifecount == 5) {
+                this.knife5.destroy();
+            } else if (this.hitknifecount == 4) {
+                this.knife4.destroy();
+            } else if (this.hitknifecount == 3) {
+                this.knife3.destroy();
+            } else if (this.hitknifecount == 2) {
+                this.knife2.destroy();
+            } else if (this.hitknifecount == 1) {
+                this.knife1.destroy();
+            }
+
+            this.hitknifecount--;
 
             // tween to throw the knife
             this.tweens.add({
@@ -360,7 +402,7 @@ class Level7 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.score >= 900) {
+                    if (this.hitknifecount == 0) {
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;
@@ -396,11 +438,11 @@ class Level7 extends Phaser.Scene {
                             callbackScope: this,
 
                             // function to be executed once the tween has been completed
-                            onComplete: function (tween) {
+                            // onComplete: function (tween) {
 
-                                // restart the game
-                                this.scene.start("Level8")
-                            }
+                            //     // restart the game
+                            //     this.scene.start("Level8")
+                            // }
                         });
                         this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
                     }
@@ -410,7 +452,9 @@ class Level7 extends Phaser.Scene {
     }
 
     onEvent() {
-        this.scene.start("Level8")
+        localStorage.setItem('Completed Level', 7);
+        game.globals.level = 8;
+        this.scene.start("LevelCompleted");
     }
 
     // method to be executed at each frame. Please notice the arguments.

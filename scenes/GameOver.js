@@ -14,7 +14,9 @@ class GameOver extends Phaser.Scene {
 
   preload() {
 
-    this.load.image("bgGameOver", "assets/img/GameOver.png");
+    localStorage.getItem('Completed Level');
+
+    this.load.image("bgGameOver", "assets/img/Levelfailed.png");
     // this.load.spritesheet('btn_restart', 'assets/img/btn_try_again_new.png', { frameWidth: 192, frameHeight: 180 });
     // this.load.spritesheet('btn_restart_hover', 'assets/img/btn_try_again_hover_new.png', { frameWidth: 192, frameHeight: 180 });
 
@@ -25,7 +27,7 @@ class GameOver extends Phaser.Scene {
     // this.load.spritesheet('btn_exit', 'assets/img/button_exit_new.png', { frameWidth: 192, frameHeight: 180 });
     // this.load.spritesheet('btn_exit_hover', 'assets/img/btn_exit_hover_new.png', { frameWidth: 192, frameHeight: 180 });
 
-    this.load.image("btn_exit", "assets/img/btn_try_again_hover_new.png");
+    this.load.image("btn_exit", "assets/img/btn_exit_new.png");
     this.load.image("btn_exit_hover", "assets/img/btn_exit_hover_new.png");
 
   }
@@ -76,9 +78,9 @@ class GameOver extends Phaser.Scene {
     //this.gameOver = this.add.text(game.config.width / 4, game.config.height / 2, 'GAME OVER', { fontSize: '80px', fill: '#FFF' });
 
     //===============================
-    this.FinalScore = this.add.text(game.config.width / 1.6, game.config.width / 1.85, score, { fontSize: '90px', fill: '#FFF' });
+    this.FinalScore = this.add.text(game.config.width / 1.6, game.config.width / 1.85, score, { fontSize: '40px', fill: '#FFF' });
 
-    this.bestScore = this.add.text(game.config.width / 1.6, game.config.width / 1.6, '' + localStorage.getItem('Best Score'), { fontSize: '90px', fill: '#FFF' });
+    this.bestScore = this.add.text(game.config.width / 1.6, game.config.width / 1.6, '' + localStorage.getItem('Best Score'), { fontSize: '40px', fill: '#FFF' });
 
     //==================================
 
