@@ -118,6 +118,10 @@ window.onload = function () {
             Level8,
             Level9,
             Level10,
+            Level11,
+            Level12,
+            Level13,
+            Level14,
             IntroductionScene]
     }
 

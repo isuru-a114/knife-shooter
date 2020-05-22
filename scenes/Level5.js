@@ -741,7 +741,7 @@ class Level5 extends Phaser.Scene {
             this.pinapple.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
-        // if the orange has not been hit...
+        // if the strawberry has not been hit...
         if (!this.strawberry.hit) {
 
             // adjusting apple rotation

@@ -65,7 +65,6 @@ class SelectLevel extends Phaser.Scene {
         this.not_comple_round1.isLocked = false;
         this.roundlist.push(this.not_comple_round1);
 
-
         var Leve1 = this.add.text(game.config.width / 6.45, game.config.height / 1.34, '1', { fontFamily: 'Arial', fontSize: 25, color: '#ffffff', fontWeight: 'bold' });
         //level 2
         this.not_comple_round2 = this.add.sprite(game.config.width / 6.5, game.config.height / 1.55, 'notcompleted');
@@ -213,7 +212,7 @@ class SelectLevel extends Phaser.Scene {
 
         ///////
         this.back = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
-        
+
         ///////
         console.log(localStorage.getItem('Completed Level'));
         for (var i = 0; i <= localStorage.getItem('Completed Level'); i++) {
@@ -232,7 +231,7 @@ class SelectLevel extends Phaser.Scene {
                 //console.log("soft left key");
                 this.callMenuButton();
             }
-            if(e.key == 'Backspace'){
+            if (e.key == 'Backspace') {
                 this.scene.transition({
                     target: 'Menu',
                     moveAbove: true,
@@ -285,6 +284,15 @@ class SelectLevel extends Phaser.Scene {
                 break;
             case 10:
                 !this.not_comple_round12.isLocked ? [this.not_comple_round11.clearTint(), this.not_comple_round11.setTint(0xffa500), this.not_comple_round12.setTint(0x00FF00), this.selectedLevel = 11] : console.log('locked');
+                break;
+            case 11:
+                !this.not_comple_round13.isLocked ? [this.not_comple_round12.clearTint(), this.not_comple_round12.setTint(0xffa500), this.not_comple_round13.setTint(0x00FF00), this.selectedLevel = 12] : console.log('locked');
+                break;
+            case 12:
+                !this.not_comple_round14.isLocked ? [this.not_comple_round13.clearTint(), this.not_comple_round13.setTint(0xffa500), this.not_comple_round14.setTint(0x00FF00), this.selectedLevel = 13] : console.log('locked');
+                break;
+            case 13:
+                !this.not_comple_round15.isLocked ? [this.not_comple_round14.clearTint(), this.not_comple_round14.setTint(0xffa500), this.not_comple_round15.setTint(0x00FF00), this.selectedLevel = 14] : console.log('locked');
                 break;
         }
     }
@@ -376,6 +384,42 @@ class SelectLevel extends Phaser.Scene {
                 //console.log("Play SELECT");
                 this.scene.transition({
                     target: 'Level10',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
+                break;
+            case 10:
+                //console.log("Play SELECT");
+                this.scene.transition({
+                    target: 'Level11',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
+                break;
+            case 11:
+                //console.log("Play SELECT");
+                this.scene.transition({
+                    target: 'Level12',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
+                break;
+            case 12:
+                //console.log("Play SELECT");
+                this.scene.transition({
+                    target: 'Level13',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
+                break;
+            case 13:
+                //console.log("Play SELECT");
+                this.scene.transition({
+                    target: 'Level14',
                     moveAbove: true,
                     duration: 300,
                 })
