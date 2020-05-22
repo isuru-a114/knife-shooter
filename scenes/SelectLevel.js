@@ -7,7 +7,6 @@ class SelectLevel extends Phaser.Scene {
 
     init() {
         this.CONFIG = this.sys.game.CONFIG;
-
     }
 
 
@@ -42,7 +41,10 @@ class SelectLevel extends Phaser.Scene {
 
         //variables
         this.roundlist = new Array();
-        this.selectedLevel = 0;
+        this.selectedLevel = parseInt(localStorage.getItem('Completed Level'));
+        if(localStorage.getItem('Completed Level') == null){
+            this.selectedLevel = 0;
+        }
 
         //background img
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgselectLevel');
@@ -55,15 +57,16 @@ class SelectLevel extends Phaser.Scene {
         this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
         this.key_home = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.HOME);
 
-
         //not completed round img
         //level 1
         this.not_comple_round1 = this.add.sprite(game.config.width / 6, game.config.height / 1.30, 'completed');
         this.not_comple_round1.displayHeight = 35;
         this.not_comple_round1.displayWidth = 35;
-        this.not_comple_round1.setTint(0x00FF00);
         this.not_comple_round1.isLocked = false;
         this.roundlist.push(this.not_comple_round1);
+        if (this.selectedLevel == 0) {
+            this.not_comple_round1.setTint(0x00FF00);
+        }
 
         var Leve1 = this.add.text(game.config.width / 6.45, game.config.height / 1.34, '1', { fontFamily: 'Arial', fontSize: 25, color: '#ffffff', fontWeight: 'bold' });
         //level 2
@@ -221,6 +224,10 @@ class SelectLevel extends Phaser.Scene {
             }
             this.roundlist[i].setTint(0xffa500);
             this.roundlist[i].isLocked = false;
+            if (i == parseInt(localStorage.getItem('Completed Level'))) {
+                console.log(i)
+                this.roundlist[i].setTint(0x00FF00);
+            }
             console.log(this.roundlist[i])
         };
 
