@@ -122,6 +122,7 @@ window.onload = function () {
             Level12,
             Level13,
             Level14,
+            Level15,
             IntroductionScene]
     }
 

@@ -215,7 +215,7 @@ class SelectLevel extends Phaser.Scene {
 
         ///////
         console.log(localStorage.getItem('Completed Level'));
-        for (var i = 0; i <= localStorage.getItem('Completed Level'); i++) {
+        for (var i = 0; i <= parseInt(localStorage.getItem('Completed Level')); i++) {
             if (i == 0) {
                 continue;
             }
@@ -245,6 +245,11 @@ class SelectLevel extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.upArrow)) {
             // console.log("UP CLICK");
             this.changeMenuButtonWithArrowUp();
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.downArrow)) {
+            // console.log("DOWN CLICK");
+            this.changeMenuButtonWithArrowDown();
         }
     }
 
@@ -293,6 +298,53 @@ class SelectLevel extends Phaser.Scene {
                 break;
             case 13:
                 !this.not_comple_round15.isLocked ? [this.not_comple_round14.clearTint(), this.not_comple_round14.setTint(0xffa500), this.not_comple_round15.setTint(0x00FF00), this.selectedLevel = 14] : console.log('locked');
+                break;
+        }
+    }
+
+    changeMenuButtonWithArrowDown() {
+        switch (this.selectedLevel) {
+            case 14:
+                !this.not_comple_round14.isLocked ? [this.not_comple_round15.clearTint(), this.not_comple_round15.setTint(0xffa500), this.not_comple_round14.setTint(0x00FF00), this.selectedLevel = 13] : console.log('locked');
+                break;
+            case 13:
+                !this.not_comple_round13.isLocked ? [this.not_comple_round14.clearTint(), this.not_comple_round14.setTint(0xffa500), this.not_comple_round13.setTint(0x00FF00), this.selectedLevel = 12] : console.log('locked');
+                break;
+            case 12:
+                !this.not_comple_round12.isLocked ? [this.not_comple_round13.clearTint(), this.not_comple_round13.setTint(0xffa500), this.not_comple_round12.setTint(0x00FF00), this.selectedLevel = 11] : console.log('locked');
+                break;
+            case 11:
+                !this.not_comple_round11.isLocked ? [this.not_comple_round12.clearTint(), this.not_comple_round12.setTint(0xffa500), this.not_comple_round11.setTint(0x00FF00), this.selectedLevel = 10] : console.log('locked');
+                break;
+            case 10:
+                !this.not_comple_round10.isLocked ? [this.not_comple_round11.clearTint(), this.not_comple_round11.setTint(0xffa500), this.not_comple_round10.setTint(0x00FF00), this.selectedLevel = 9] : console.log('locked');
+                break;
+            case 9:
+                !this.not_comple_round9.isLocked ? [this.not_comple_round10.clearTint(), this.not_comple_round10.setTint(0xffa500), this.not_comple_round9.setTint(0x00FF00), this.selectedLevel = 8] : console.log('locked');
+                break;
+            case 8:
+                !this.not_comple_round8.isLocked ? [this.not_comple_round9.clearTint(), this.not_comple_round9.setTint(0xffa500), this.not_comple_round8.setTint(0x00FF00), this.selectedLevel = 7] : console.log('locked');
+                break;
+            case 7:
+                !this.not_comple_round7.isLocked ? [this.not_comple_round8.clearTint(), this.not_comple_round8.setTint(0xffa500), this.not_comple_round7.setTint(0x00FF00), this.selectedLevel = 6] : console.log('locked');
+                break;
+            case 6:
+                !this.not_comple_round6.isLocked ? [this.not_comple_round7.clearTint(), this.not_comple_round7.setTint(0xffa500), this.not_comple_round6.setTint(0x00FF00), this.selectedLevel = 5] : console.log('locked');
+                break;
+            case 5:
+                !this.not_comple_round5.isLocked ? [this.not_comple_round6.clearTint(), this.not_comple_round6.setTint(0xffa500), this.not_comple_round5.setTint(0x00FF00), this.selectedLevel = 4] : console.log('locked');
+                break;
+            case 4:
+                !this.not_comple_round4.isLocked ? [this.not_comple_round5.clearTint(), this.not_comple_round5.setTint(0xffa500), this.not_comple_round4.setTint(0x00FF00), this.selectedLevel = 3] : console.log('locked');
+                break;
+            case 3:
+                !this.not_comple_round3.isLocked ? [this.not_comple_round4.clearTint(), this.not_comple_round4.setTint(0xffa500), this.not_comple_round3.setTint(0x00FF00), this.selectedLevel = 2] : console.log('locked');
+                break;
+            case 2:
+                !this.not_comple_round2.isLocked ? [this.not_comple_round3.clearTint(), this.not_comple_round3.setTint(0xffa500), this.not_comple_round2.setTint(0x00FF00), this.selectedLevel = 1] : console.log('locked');
+                break;
+            case 1:
+                !this.not_comple_round1.isLocked ? [this.not_comple_round2.clearTint(), this.not_comple_round2.setTint(0xffa500), this.not_comple_round1.setTint(0x00FF00), this.selectedLevel = 0] : console.log('locked');
                 break;
         }
     }
@@ -420,6 +472,15 @@ class SelectLevel extends Phaser.Scene {
                 //console.log("Play SELECT");
                 this.scene.transition({
                     target: 'Level14',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
+                break;
+            case 14:
+                //console.log("Play SELECT");
+                this.scene.transition({
+                    target: 'Level15',
                     moveAbove: true,
                     duration: 300,
                 })
