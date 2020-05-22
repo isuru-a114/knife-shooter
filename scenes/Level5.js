@@ -454,7 +454,7 @@ class Level5 extends Phaser.Scene {
                             scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
-                            this.orange.setFrame(1);
+                            this.pinapple.setFrame(1);
 
                             // add the other apple slice in the same apple posiiton
                             var slice4 = this.add.sprite(this.pinapple.x, this.pinapple.y, "pinapple", 2);
