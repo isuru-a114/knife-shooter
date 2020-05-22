@@ -1,17 +1,38 @@
 class HelpScene extends Phaser.Scene {
 
     constructor() {
-        super({key: "HelpScene", active: false});
+        super({ key: "HelpScene", active: false });
     }
 
-    preload(){
+    preload() {
 
         this.load.image("bgIntro", "assets/img/Instructions.png");
         // this.load.image("bgLevels", "assets/img/levels.png");
         this.load.image("bgGameControls", "assets/img/GameControls.png");
     }
 
-    create(){
+    create() {
+
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "SoftRight") {
@@ -32,7 +53,7 @@ class HelpScene extends Phaser.Scene {
         this.right_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 
-        this.goBack = this.add.text(game.config.width - game.config.width*8/100, game.config.height - game.config.height*5/100, "Back").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
+        this.goBack = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
         this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
         this.left_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -42,7 +63,7 @@ class HelpScene extends Phaser.Scene {
 
     }
 
-    update(){
+    update() {
         if (Phaser.Input.Keyboard.JustDown(this.left_arrow)) {
             //console.log("left CLICK");
             this.changeSlidesLeft();
@@ -62,11 +83,11 @@ class HelpScene extends Phaser.Scene {
 
     }
 
-    changeSlidesRight(){
+    changeSlidesRight() {
         switch (this.selected_screen) {
             case "intro":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgGameControls');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameControls');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "controls";
@@ -80,7 +101,7 @@ class HelpScene extends Phaser.Scene {
             //     break;
             case "level":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgIntro');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgIntro');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "intro";
@@ -89,10 +110,10 @@ class HelpScene extends Phaser.Scene {
 
         }
         //this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
-        this.goBack = this.add.text(game.config.width - game.config.width*8/100, game.config.height - game.config.height*5/100, "Back").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
+        this.goBack = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
     }
 
-    changeSlidesLeft(){
+    changeSlidesLeft() {
         switch (this.selected_screen) {
             // case "intro":
             //     this.image.destroy();
@@ -103,26 +124,31 @@ class HelpScene extends Phaser.Scene {
             //     break;
             case "level":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgGameControls');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameControls');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "controls";
                 break;
             case "controls":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgIntro');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgIntro');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
                 this.selected_screen = "intro";
                 break;
         }
-       // this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
-        this.goBackbtn = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5/100, "Back").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
+        // this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
+        this.goBackbtn = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
     }
 
-    goBackScene(){
+    goBackScene() {
         //console.log("clicked")
-        this.scene.start("Menu");
+        this.scene.transition({
+            target: 'Menu',
+            moveAbove: true,
+            duration: 300,
+        })
+        // this.scene.start("Menu");
     }
 
 

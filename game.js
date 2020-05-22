@@ -78,7 +78,7 @@ window.onload = function () {
         height: 640,
 
         // background color (black)
-        backgroundColor: 0x000000,
+        backgroundColor: 0x10073c,
 
 
         // scene to play
@@ -88,7 +88,7 @@ window.onload = function () {
         physics: {
             default: 'arcade',
             arcade: {
-                debug: true,
+                debug: false,
                 gravity: {
                     y: 0 //the game gravity
                 }

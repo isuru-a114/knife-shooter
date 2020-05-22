@@ -27,6 +27,26 @@ class Level2 extends Phaser.Scene {
 
     // method to be executed once the scene has been created
     create() {
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
 
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
@@ -91,8 +111,8 @@ class Level2 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(0, 360);
-        var appleAngle2 = Phaser.Math.Between(0, 360);
+        var appleAngle = Phaser.Math.Between(0, 180);
+        var appleAngle2 = Phaser.Math.Between(180, 360);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -427,7 +447,10 @@ class Level2 extends Phaser.Scene {
     }
 
     onEvent() {
-        localStorage.setItem('Completed Level', 2);
+        if( localStorage.getItem('Completed Level') <= 2){
+            localStorage.setItem('Completed Level', 2);
+        }
+       
         game.globals.level = 3;
         this.scene.start("LevelCompleted");
     }

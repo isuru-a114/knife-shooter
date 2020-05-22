@@ -13,7 +13,7 @@ class LevelCompleted extends Phaser.Scene {
 
 
     preload() {
-        this.load.image("bgGameOver", "assets/img/LevelPassed.png");
+        this.load.image("bglevelpassed", "assets/img/LevelPassed.png");
         // this.load.spritesheet('btn_restart', 'assets/img/btn_try_again_new.png', { frameWidth: 192, frameHeight: 180 });
         // this.load.spritesheet('btn_restart_hover', 'assets/img/btn_try_again_hover_new.png', { frameWidth: 192, frameHeight: 180 });
 
@@ -31,7 +31,28 @@ class LevelCompleted extends Phaser.Scene {
 
     create() {
 
-        this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameOver');
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
+
+        this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bglevelpassed');
         this.image.displayHeight = game.config.height;
         this.image.displayWidth = game.config.width;
 
@@ -253,11 +274,21 @@ class LevelCompleted extends Phaser.Scene {
                 break;
             case "Menu":
                 //console.log("Menu SELECT");
-                this.scene.start("Menu")
+                this.scene.transition({
+                    target: 'Menu',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Menu")
                 break;
             case "Exit":
                 //console.log("Exit SELECT");
-                this.scene.start("Menu")
+                this.scene.transition({
+                    target: 'Menu',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Menu")
                 break;
             default:
 

@@ -18,6 +18,28 @@ class SelectLevel extends Phaser.Scene {
     }
 
     create() {
+
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
+
         //variables
         this.roundlist = new Array();
         this.selectedLevel = 0;
@@ -190,6 +212,9 @@ class SelectLevel extends Phaser.Scene {
         var Leve15 = this.add.text(game.config.width / 1.25, game.config.height / 3.89, '15', { fontFamily: 'Arial', fontSize: 25, color: '#ffffff' });
 
         ///////
+        this.back = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
+        
+        ///////
         console.log(localStorage.getItem('Completed Level'));
         for (var i = 0; i <= localStorage.getItem('Completed Level'); i++) {
             if (i == 0) {
@@ -202,9 +227,17 @@ class SelectLevel extends Phaser.Scene {
 
         //////
         this.input.keyboard.on('keyup', function (e) {
+            console.log(e)
             if (e.key == "Enter") {
                 //console.log("soft left key");
                 this.callMenuButton();
+            }
+            if(e.key == 'Backspace'){
+                this.scene.transition({
+                    target: 'Menu',
+                    moveAbove: true,
+                    duration: 300,
+                })
             }
         }, this);
     }
@@ -260,43 +293,93 @@ class SelectLevel extends Phaser.Scene {
         switch (this.selectedLevel) {
             case 0:
                 // console.log("Play SELECT");
-                this.scene.start("Level1")
+                this.scene.transition({
+                    target: 'Level1',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level1")
                 break;
             case 1:
                 //console.log("Play SELECT");
-                this.scene.start("Level2")
+                this.scene.transition({
+                    target: 'Level2',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level2")
                 break;
             case 2:
                 //console.log("Play SELECT");
-                this.scene.start("Level3")
+                this.scene.transition({
+                    target: 'Level3',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level3")
                 break;
             case 3:
                 //console.log("Play SELECT");
-                this.scene.start("Level4")
+                this.scene.transition({
+                    target: 'Level4',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level4")
                 break;
             case 4:
                 //console.log("Play SELECT");
-                this.scene.start("Level5")
+                this.scene.transition({
+                    target: 'Level5',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level5")
                 break;
             case 5:
                 //console.log("Play SELECT");
-                this.scene.start("Level6")
+                this.scene.transition({
+                    target: 'Level6',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level6")
                 break;
             case 6:
                 //console.log("Play SELECT");
-                this.scene.start("Level7")
+                this.scene.transition({
+                    target: 'Level7',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level7")
                 break;
             case 7:
                 //console.log("Play SELECT");
-                this.scene.start("Level8")
+                this.scene.transition({
+                    target: 'Level8',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level8")
                 break;
             case 8:
                 //console.log("Play SELECT");
-                this.scene.start("Level9")
+                this.scene.transition({
+                    target: 'Level9',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level9")
                 break;
             case 9:
                 //console.log("Play SELECT");
-                this.scene.start("Level10")
+                this.scene.transition({
+                    target: 'Level10',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("Level10")
                 break;
         }
     }

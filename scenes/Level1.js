@@ -28,6 +28,27 @@ class Level1 extends Phaser.Scene {
 
     // method to be executed once the scene has been created
     create() {
+
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
       
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
@@ -140,7 +161,6 @@ class Level1 extends Phaser.Scene {
     }
 
     goBackScene() {
-        //console.log("clicked")
         this.scene.start("Menu");
     }
 

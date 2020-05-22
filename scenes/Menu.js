@@ -12,8 +12,6 @@ class Menu extends Phaser.Scene {
 
 
     preload() {
-
-
         this.load.image("btn_play", "assets/img/btn_play_new.png");
         this.load.image("btn_score", "assets/img/btn_score_new.png");
         this.load.image("btn_help", "assets/img/btn_help_new.png");
@@ -30,6 +28,28 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
+
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
+
 
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgMenu');
         this.image.displayHeight = game.config.height;
@@ -98,7 +118,7 @@ class Menu extends Phaser.Scene {
         // this.btn_exit.displayWidth = game.config.width / 2;
 
 
-        this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "About").setFontSize(60).setFontFamily("Arial").setOrigin(0.5);
+        this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "About").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
         //this.option = this.add.text(game.config.width - game.config.width * 90 / 100, game.config.height - game.config.height * 5 / 100, "Option").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
 
@@ -287,15 +307,30 @@ class Menu extends Phaser.Scene {
         switch (this.selected_button) {
             case "Play":
                 //console.log("Play SELECT");
-                this.scene.start("SelectLevel")
+                this.scene.transition({
+                    target: 'SelectLevel',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("SelectLevel")
                 break;
             case "ScoreScene":
                 //console.log("ScoreScene SELECT");
-                this.scene.start("ScoreScene")
+                this.scene.transition({
+                    target: 'ScoreScene',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("ScoreScene")
                 break;
             case "Help":
                 //console.log("Option SELECT");
-                this.scene.start("HelpScene")
+                this.scene.transition({
+                    target: 'HelpScene',
+                    moveAbove: true,
+                    duration: 300,
+                })
+                // this.scene.start("HelpScene")
                 break;
             // case "Exit":
             //     //console.log("Exit SELECT");

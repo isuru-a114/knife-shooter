@@ -25,10 +25,35 @@ class Level6 extends Phaser.Scene {
             frameWidth: 154,
             frameHeight: 154
         });
+        this.load.spritesheet("strawberry", "assets/img/strawberry.png", {
+            frameWidth: 35.333333,
+            frameHeight: 49
+        });
     }
 
     // method to be executed once the scene has been created
     create() {
+
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
 
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
@@ -96,8 +121,9 @@ class Level6 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(90, 360);
+        var appleAngle = Phaser.Math.Between(90, 260);
         var rockAngle = Phaser.Math.Between(0, 90);
+        var strawberryAngle = Phaser.Math.Between(260, 360)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -105,27 +131,33 @@ class Level6 extends Phaser.Scene {
         // adding the apple
         this.apple = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "apple");
         this.rock = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
+        this.strawberry = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "strawberry");
 
         // setting apple's anchor point to bottom center
         this.apple.setOrigin(0.5, 1);
         this.rock.setOrigin(0.5, 1);
+        this.strawberry.setOrigin(0.5, 1);
 
         // setting apple sprite angle
         this.apple.angle = appleAngle;
         this.rock.angle = rockAngle;
+        this.strawberry.angle = strawberryAngle;
 
         // saving apple start angle
         this.apple.startAngle = appleAngle;
         this.rock.startAngle = rockAngle;
+        this.strawberry.startAngle = strawberryAngle;
 
 
         // apple depth is the same as target depth
         this.apple.depth = 1;
         this.rock.depth = 1;
+        this.strawberry.depth = 1;
 
         // has the apple been hit?
         this.apple.hit = false;
         this.rock.hit = false;
+        this.strawberry.hit = false;
 
         // waiting for player input to throw a knife
         this.input.keyboard.on("keyup_ENTER", this.throwKnife, this);
@@ -306,6 +338,63 @@ class Level6 extends Phaser.Scene {
                             });
                         }
 
+                        //for strawberry
+                        // is the knife close enough to the apple? And the appls is still to be hit?
+                        if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.strawberry.startAngle)) < gameOptions.minAngle && !this.strawberry.hit) {
+
+                            // apple has been hit
+                            this.strawberry.hit = true;
+                            this.score += 20;
+                            scoreText.setText('SCORE:' + this.score);
+
+                            // change apple frame to show one slice
+                            this.strawberry.setFrame(1);
+
+                            // add the other apple slice in the same apple posiiton
+                            var slice5 = this.add.sprite(this.strawberry.x, this.strawberry.y, "strawberry", 2);
+
+                            // same angle too.
+                            slice5.angle = this.strawberry.angle;
+
+                            // and same origin
+                            slice5.setOrigin(0.5, 1);
+
+                            // tween to make apple slices fall down
+                            this.tweens.add({
+
+                                // adding the knife to tween targets
+                                targets: [this.strawberry, slice5],
+
+                                // y destination
+                                y: game.config.height + this.strawberry.height,
+
+                                // x destination
+                                x: {
+
+                                    // running a function to get different x ends for each slice according to frame number
+                                    getEnd: function (target, key, value) {
+                                        return Phaser.Math.Between(0, game.config.width / 2) + (game.config.width / 2 * (target.frame.name - 1));
+                                    }
+                                },
+
+                                // rotation destination, in radians
+                                angle: 45,
+
+                                // tween duration
+                                duration: gameOptions.throwSpeed * 6,
+
+                                // callback scope
+                                callbackScope: this,
+
+                                // function to be executed once the tween has been completed
+                                // onComplete: function (tween) {
+
+                                //     // restart the game
+                                //     this.scene.start("EasyPlayGame")
+                                // }
+                            });
+                        }
+
                         // player can now throw again
                         this.canThrow = true;
 
@@ -402,7 +491,10 @@ class Level6 extends Phaser.Scene {
     }
 
     onEvent() {
-        localStorage.setItem('Completed Level', 6);
+        if (localStorage.getItem('Completed Level') <= 6) {
+            localStorage.setItem('Completed Level', 6);
+        }
+        
         game.globals.level = 7;
         this.scene.start("LevelCompleted");
     }
@@ -442,6 +534,20 @@ class Level6 extends Phaser.Scene {
             // adjusting apple position
             this.apple.x = this.target.x + (this.target.width / 2) * Math.cos(radians);
             this.apple.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
+        }
+
+        // if the strawberry has not been hit...
+        if (!this.strawberry.hit) {
+
+            // adjusting apple rotation
+            this.strawberry.angle += this.currentRotationSpeed;
+
+            // turning apple angle in radians
+            var radians = Phaser.Math.DegToRad(this.strawberry.angle - 90);
+
+            // adjusting apple position
+            this.strawberry.x = this.target.x + (this.target.width / 2) * Math.cos(radians);
+            this.strawberry.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
         // if the rock has not been hit...

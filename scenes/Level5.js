@@ -40,6 +40,27 @@ class Level5 extends Phaser.Scene {
     // method to be executed once the scene has been created
     create() {
 
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
+            this.cameras.main.setZoom(0.001);
+        }, this);
+
+        this.events.on('transitioncomplete', function (fromScene, duration) {
+            // this.cameras.main.zoomTo(1, 300);
+            this.cameras.main.zoomTo(1, 300);
+        }, this);
+
+        // this.events.on('transitioncomplete', function (fromScene) {
+
+        // });
+
+        this.events.on('transitionout', function (toScene, duration) {
+
+            this.cameras.main.zoomTo(0.05, 300);
+
+        }, this);
+        //
+
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
         this.image.displayHeight = game.config.height;
@@ -102,11 +123,11 @@ class Level5 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(0, 360);
-        var appleAngle2 = Phaser.Math.Between(0, 360);
-        var orangeAngle = Phaser.Math.Between(0, 360);
-        var pinappleAngle = Phaser.Math.Between(0, 360)
-        var strawberryAngle = Phaser.Math.Between(0, 360)
+        var appleAngle = Phaser.Math.Between(0, 72);
+        var appleAngle2 = Phaser.Math.Between(72, 144);
+        var orangeAngle = Phaser.Math.Between(144, 216);
+        var pinappleAngle = Phaser.Math.Between(216, 298)
+        var strawberryAngle = Phaser.Math.Between(298, 360)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -490,7 +511,7 @@ class Level5 extends Phaser.Scene {
                             scoreText.setText('SCORE:' + this.score);
 
                             // change apple frame to show one slice
-                            this.orange.setFrame(1);
+                            this.strawberry.setFrame(1);
 
                             // add the other apple slice in the same apple posiiton
                             var slice5 = this.add.sprite(this.strawberry.x, this.strawberry.y, "strawberry", 2);
@@ -632,7 +653,10 @@ class Level5 extends Phaser.Scene {
     }
 
     onEvent() {
-        localStorage.setItem('Completed Level', 5);
+        if (localStorage.getItem('Completed Level') <= 5) {
+            localStorage.setItem('Completed Level', 5);
+        }
+
         game.globals.level = 6;
         this.scene.start("LevelCompleted");
     }

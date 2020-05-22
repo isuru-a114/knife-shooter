@@ -94,10 +94,11 @@ class Level8 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(180, 360);
-        var appleAngle2 = Phaser.Math.Between(180, 360);
-        var rockAngle = Phaser.Math.Between(0, 90);
-        var rockAngle2 = Phaser.Math.Between(0, 90);
+        var appleAngle = Phaser.Math.Between(180, 270);
+        var appleAngle2 = Phaser.Math.Between(280, 360);
+        var rockAngle = Phaser.Math.Between(0, 30);
+        var rockAngle2 = Phaser.Math.Between(35, 70);
+        var rockAngle3 = Phaser.Math.Between(70, 90);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -108,36 +109,42 @@ class Level8 extends Phaser.Scene {
         this.apple2 = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians2), "apple");
         this.rock = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
         this.rock2 = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
+        this.rock3 = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
 
         // setting apple's anchor point to bottom center
         this.apple.setOrigin(0.5, 1);
         this.apple2.setOrigin(0.5, 1);
         this.rock.setOrigin(0.5, 1);
         this.rock2.setOrigin(0.5, 1);
+        this.rock3.setOrigin(0.5, 1);
 
         // setting apple sprite angle
         this.apple.angle = appleAngle;
         this.apple2.angle = appleAngle2;
         this.rock.angle = rockAngle;
         this.rock2.angle = rockAngle2;
+        this.rock3.angle = rockAngle3;
 
         // saving apple start angle
         this.apple.startAngle = appleAngle;
         this.apple2.startAngle = appleAngle2;
         this.rock.startAngle = rockAngle;
         this.rock2.startAngle = rockAngle2;
+        this.rock3.startAngle = rockAngle3;
 
         // apple depth is the same as target depth
         this.apple.depth = 1;
         this.apple2.depth = 1;
         this.rock.depth = 1;
         this.rock2.depth = 1;
+        this.rock3.depth = 1;
 
         // has the apple been hit?
         this.apple.hit = false;
         this.apple2.hit = false;
         this.rock.hit = false;
         this.rock2.hit = false;
+        this.rock3.hit = false;
 
         // waiting for player input to throw a knife
         this.input.keyboard.on("keyup_ENTER", this.throwKnife, this);
@@ -230,16 +237,21 @@ class Level8 extends Phaser.Scene {
 
                             // no need to continue with the loop
                             break;
-                        } else {
-                            this.physics.add.overlap(this.knife, this.rock, (e) => {
-                                this.legal = false;
-                            })
+                        }
+                        this.physics.add.overlap(this.knife, this.rock, (e) => {
+                            this.legal = false;
+                        })
 
-                            this.physics.add.overlap(this.knife, this.rock2, (e) => {
-                                this.legal = false;
-                            })
+                        this.physics.add.overlap(this.knife, this.rock2, (e) => {
+                            this.legal = false;
+                        })
 
-                            console.log(this.legal);
+                        this.physics.add.overlap(this.knife, this.rock3, (e) => {
+                            this.legal = false;
+                        })
+
+                        console.log(this.legal);
+                        if (this.legal == false) {
                             legalHit = this.legal;
                         }
                     }
@@ -458,7 +470,10 @@ class Level8 extends Phaser.Scene {
     }
 
     onEvent() {
-        localStorage.setItem('Completed Level', 8);
+        if (localStorage.getItem('Completed Level') <= 8) {
+            localStorage.setItem('Completed Level', 8);
+        }
+
         game.globals.level = 9;
         this.scene.start("LevelCompleted");
     }
@@ -540,6 +555,20 @@ class Level8 extends Phaser.Scene {
             // adjusting apple position
             this.rock2.x = this.target.x + (this.target.width / 2) * Math.cos(radians);
             this.rock2.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
+        }
+
+        // if the rock has not been hit...
+        if (!this.rock3.hit) {
+
+            // adjusting apple rotation
+            this.rock3.angle += this.currentRotationSpeed;
+
+            // turning apple angle in radians
+            var radians = Phaser.Math.DegToRad(this.rock3.angle - 90);
+
+            // adjusting apple position
+            this.rock3.x = this.target.x + (this.target.width / 2) * Math.cos(radians);
+            this.rock3.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
         // adjusting current rotation speed using linear interpolation
