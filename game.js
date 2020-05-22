@@ -123,6 +123,7 @@ window.onload = function () {
             Level13,
             Level14,
             Level15,
+            GameComplete,
             IntroductionScene]
     }
 
