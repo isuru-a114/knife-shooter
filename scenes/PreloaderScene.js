@@ -103,7 +103,7 @@ class Preloader extends Phaser.Scene {
       // this.scene.start('IntroductionScene');
     } else {
       this.scene.transition({
-        target: 'GameComplete',
+        target: 'Menu',
         moveAbove: true,
         duration: 300,
       })
