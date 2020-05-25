@@ -59,16 +59,16 @@ class ContactScene extends Phaser.Scene {
         }, this);
 
 
-        this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
+        // this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
         // this.enter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
 
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
-            //console.log("back CLICK");
-            this.goBackScene();
-        }
+        // if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
+        //     //console.log("back CLICK");
+        //     this.goBackScene();
+        // }
 
         // if (Phaser.Input.Keyboard.JustDown(this.enter)) {
         //     console.log("ENTER CLICK");

@@ -152,13 +152,13 @@ class Level1 extends Phaser.Scene {
             loop: true
         });
 
-        //back
-        this.input.keyboard.on('keyup', function (e) {
-            if (e.key == "Backspace") {
-                //console.log("soft right key");
-                this.goBackScene();
-            }
-        }, this);
+        // //back
+        // this.input.keyboard.on('keyup', function (e) {
+        //     if (e.key == "Backspace") {
+        //         //console.log("soft right key");
+        //         this.goBackScene();
+        //     }
+        // }, this);
     }
 
     goBackScene() {

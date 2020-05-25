@@ -34,17 +34,17 @@ class ScoreScene extends Phaser.Scene {
         //
 
         //kaiads
-        // getKaiAd({
-        //     publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
-        //     app: 'Knife shooter',
-        //     slot: 'knife shooter',
-        //     onerror: err => console.error('Custom catch:', err),
-        //     onready: ad => {
-        //         // Ad is ready to be displayed
-        //         // calling 'display' will display the ad
-        //         ad.call('display')
-        //     }
-        // })
+        getKaiAd({
+            publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
+            app: 'Knife shooter',
+            slot: 'knife shooter',
+            onerror: err => console.error('Custom catch:', err),
+            onready: ad => {
+                // Ad is ready to be displayed
+                // calling 'display' will display the ad
+                ad.call('display')
+            }
+        })
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "SoftRight") {
@@ -86,15 +86,12 @@ class ScoreScene extends Phaser.Scene {
             this.THIRD = this.add.text(game.config.width / 2.1, game.config.height / 4 * 2.9, ThirdHighScore, { fontSize: '40px', fill: '#FFF' });
         }
         this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
-        this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
+        // this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
     }
 
     // method to be called at each frame
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
-            //console.log("back CLICK");
-            this.goBackScene();
-        }
+       
     }
 
     goBackScene() {

@@ -42,7 +42,7 @@ class IntroductionScene extends Phaser.Scene {
 
         this.left_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
+        // this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
 
         this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
@@ -73,10 +73,10 @@ class IntroductionScene extends Phaser.Scene {
 
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
-            //console.log("back CLICK");
-            this.goToMenuScene();
-        }
+        // if (Phaser.Input.Keyboard.JustDown(this.back_space)) {
+        //     //console.log("back CLICK");
+        //     this.goToMenuScene();
+        // }
     }
 
     goToMenuScene() {
