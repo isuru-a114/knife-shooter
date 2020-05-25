@@ -85,6 +85,8 @@ class Level8 extends Phaser.Scene {
 
         //knife count
         this.hitknifecount = 7;
+        this.lastHit = true;
+
         //score 
         this.score = score;
         scoreText = this.add.text(game.config.width / 13, game.config.height / 20, 'SCORE:' + this.score, { fontSize: '30px', fill: '#FFF' });
@@ -116,7 +118,7 @@ class Level8 extends Phaser.Scene {
 
         // starting apple angle
         var appleAngle = Phaser.Math.Between(180, 270);
-        var appleAngle2 = Phaser.Math.Between(280, 360);
+        var appleAngle2 = Phaser.Math.Between(280, 340);
         var rockAngle = Phaser.Math.Between(0, 30);
         var rockAngle2 = Phaser.Math.Between(35, 70);
         var rockAngle3 = Phaser.Math.Between(70, 90);
@@ -410,7 +412,9 @@ class Level8 extends Phaser.Scene {
                     }
                     // in case this is not a legal hit
                     else {
-
+                        if (this.hitknifecount == 0) {
+                            this.lastHit = false;
+                        }
                         // tween to make the knife fall down
                         this.tweens.add({
 
@@ -438,7 +442,9 @@ class Level8 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.hitknifecount == 0) {
+                    if (this.lastHit == false) {
+                        console.log("lastHit")
+                    } else if (this.hitknifecount == 0) {
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;

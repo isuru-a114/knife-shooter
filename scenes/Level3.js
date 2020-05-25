@@ -86,6 +86,7 @@ class Level3 extends Phaser.Scene {
 
         //knife count
         this.hitknifecount = 6;
+        this.lastHit = true;
 
         //score 
         this.score = score;
@@ -438,6 +439,9 @@ class Level3 extends Phaser.Scene {
                     }
                     // in case this is not a legal hit
                     else {
+                        if (this.hitknifecount == 0) {
+                            this.lastHit = false;
+                        }
 
                         // tween to make the knife fall down
                         this.tweens.add({
@@ -466,7 +470,9 @@ class Level3 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.hitknifecount == 0) {
+                    if(this.lastHit == false){
+                        console.log("lastHit")
+                    }else if (this.hitknifecount == 0) {
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;
@@ -516,10 +522,10 @@ class Level3 extends Phaser.Scene {
     }
 
     onEvent() {
-        if( localStorage.getItem('Completed Level') <= 3){
+        if (localStorage.getItem('Completed Level') <= 3) {
             localStorage.setItem('Completed Level', 3);
         }
-       
+
         game.globals.level = 4;
         this.scene.start("LevelCompleted");
     }

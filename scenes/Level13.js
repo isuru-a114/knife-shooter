@@ -94,6 +94,7 @@ class Level13 extends Phaser.Scene {
         this.knife8 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 210, 'knifebord');
         //knife count
         this.hitknifecount = 8;
+        this.lastHit = true;
 
         //score 
         this.score = score;
@@ -530,7 +531,9 @@ class Level13 extends Phaser.Scene {
                     }
                     // in case this is not a legal hit
                     else {
-
+                        if (this.hitknifecount == 0) {
+                            this.lastHit = false;
+                        }
                         // tween to make the knife fall down
                         this.tweens.add({
 
@@ -558,7 +561,9 @@ class Level13 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if (this.hitknifecount == 0) {
+                    if (this.lastHit == false) {
+                        console.log("lastHit")
+                    } else if (this.hitknifecount == 0) {
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;

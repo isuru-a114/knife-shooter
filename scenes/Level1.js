@@ -21,9 +21,9 @@ class Level1 extends Phaser.Scene {
 
         this.load.spritesheet('target', 'assets/img/spritesheet.png', {
             frameWidth: 154,
-            frameHeight: 154
+            frameHeight: 153
         });
-        console.log("he he he")
+        // console.log("he he he")
     }
 
     // method to be executed once the scene has been created
@@ -49,7 +49,7 @@ class Level1 extends Phaser.Scene {
 
         }, this);
         //
-      
+
         //background
         this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'playBG');
         this.image.displayHeight = game.config.height;
@@ -59,12 +59,12 @@ class Level1 extends Phaser.Scene {
         this.score_btn = this.add.image(game.config.width / 4, game.config.height / 15 + 5, 'score');
         this.score_btn.displayHeight = game.config.height / 14;
         this.score_btn.displayWidth = game.config.width / 2.8;
-        
+
         //LEVEL
         this.score_btn = this.add.image(game.config.width / 1.3, game.config.height / 15 + 5, 'score');
         this.score_btn.displayHeight = game.config.height / 14;;
         this.score_btn.displayWidth = game.config.width / 2.8;
-       
+
         //knife shadow set
         this.knifeshadowset1 = this.add.sprite(game.config.width / 6, game.config.height / 2, 'knifeshadow');
         this.knifeshadowset2 = this.add.sprite(game.config.width / 6, (game.config.height / 2) + 30, 'knifeshadow');
@@ -85,6 +85,7 @@ class Level1 extends Phaser.Scene {
 
         //knife count
         this.hitknifecount = 6;
+        this.lastHit = true;
 
         //score 
         this.scroe = 0;
@@ -324,7 +325,9 @@ class Level1 extends Phaser.Scene {
                     }
                     // in case this is not a legal hit
                     else {
-
+                        if (this.hitknifecount == 0) {
+                            this.lastHit = false;
+                        }
                         // tween to make the knife fall down
                         this.tweens.add({
 
@@ -345,15 +348,16 @@ class Level1 extends Phaser.Scene {
 
                             // function to be executed once the tween has been completed
                             onComplete: function (tween) {
-
                                 // restart the game
-                                this.scene.start("GameOver")
+                                this.scene.start("GameOver");
                             }
                         });
                     }
                     score = this.scroe;
-                    if (this.hitknifecount == 0) {
-
+                    if (this.lastHit == false) {
+                        console.log("lastHit")
+                    } else if (this.hitknifecount == 0) {
+                        console.log(this.lastHit)
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;
@@ -402,12 +406,12 @@ class Level1 extends Phaser.Scene {
     }
 
     onEvent() {
-        if( localStorage.getItem('Completed Level') <= 1){
+        if (localStorage.getItem('Completed Level') <= 1) {
             localStorage.setItem('Completed Level', 1);
         }
-       
-        game.globals.level = 2;       
-        this.scene.start("LevelCompleted");        
+
+        game.globals.level = 2;
+        this.scene.start("LevelCompleted");
     }
     // method to be executed at each frame. Please notice the arguments.
     update(time, delta) {
