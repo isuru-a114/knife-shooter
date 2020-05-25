@@ -124,7 +124,7 @@ class Level6 extends Phaser.Scene {
         // starting apple angle
         var appleAngle = Phaser.Math.Between(100, 260);
         var rockAngle = Phaser.Math.Between(0, 80);
-        var strawberryAngle = Phaser.Math.Between(280, 350)
+        var strawberryAngle = Phaser.Math.Between(280, 340)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);

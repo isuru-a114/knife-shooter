@@ -118,7 +118,7 @@ class Level7 extends Phaser.Scene {
 
         // starting apple angle
         var appleAngle = Phaser.Math.Between(90, 160);
-        var appleAngle2 = Phaser.Math.Between(270, 350);
+        var appleAngle2 = Phaser.Math.Between(270, 340);
         var rockAngle = Phaser.Math.Between(0, 50);
         var rockAngle2 = Phaser.Math.Between(180, 250);
 
