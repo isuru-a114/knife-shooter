@@ -12,8 +12,8 @@ class ScoreScene extends Phaser.Scene {
     // method to be executed once, when the scene has been created
     create() {
 
-         //
-         this.events.on('transitionstart', function (fromScene, duration) {
+        //
+        this.events.on('transitionstart', function (fromScene, duration) {
             this.cameras.main.setZoom(0.001);
         }, this);
 
@@ -33,8 +33,8 @@ class ScoreScene extends Phaser.Scene {
         }, this);
         //
 
-         //kaiads
-         getKaiAd({
+        //kaiads
+        getKaiAd({
             publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
             app: 'Knife shooter',
             slot: 'knife shooter',

@@ -52,8 +52,8 @@ class LevelCompleted extends Phaser.Scene {
         }, this);
         //
 
-         //kaiads
-         getKaiAd({
+        //kaiads
+        getKaiAd({
             publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
             app: 'Knife shooter',
             slot: 'knife shooter',
