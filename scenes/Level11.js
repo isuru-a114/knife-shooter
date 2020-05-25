@@ -151,11 +151,11 @@ class Level11 extends Phaser.Scene {
 
         // starting apple angle
         var appleAngle = Phaser.Math.Between(0, 72);
-        var appleAngle2 = Phaser.Math.Between(72, 144);
-        var orangeAngle = Phaser.Math.Between(144, 216);
+        var appleAngle2 = Phaser.Math.Between(82, 134);
+        var orangeAngle = Phaser.Math.Between(144, 200);
         var pinappleAngle = Phaser.Math.Between(216, 298)
-        var strawberryAngle = Phaser.Math.Between(298, 320)
-        var strawberryAngle2 = Phaser.Math.Between(330, 360)
+        var strawberryAngle = Phaser.Math.Between(310, 320)
+        var strawberryAngle2 = Phaser.Math.Between(330, 350)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);

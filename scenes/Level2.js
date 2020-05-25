@@ -113,7 +113,7 @@ class Level2 extends Phaser.Scene {
 
         // starting apple angle
         var appleAngle = Phaser.Math.Between(0, 180);
-        var appleAngle2 = Phaser.Math.Between(180, 360);
+        var appleAngle2 = Phaser.Math.Between(200, 350);
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);

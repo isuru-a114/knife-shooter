@@ -129,7 +129,7 @@ class Level14 extends Phaser.Scene {
         var appleAngle = Phaser.Math.Between(100, 150);
         var appleAngle2 = Phaser.Math.Between(50, 90);
         var orangeAngle = Phaser.Math.Between(220, 300);
-        var strawberryAngle = Phaser.Math.Between(310, 360)
+        var strawberryAngle = Phaser.Math.Between(310, 350)
         var rockAngle = Phaser.Math.Between(0, 40);
         var rockAngle2 = Phaser.Math.Between(170, 210);
 

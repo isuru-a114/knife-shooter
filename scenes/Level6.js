@@ -124,7 +124,7 @@ class Level6 extends Phaser.Scene {
         // starting apple angle
         var appleAngle = Phaser.Math.Between(100, 260);
         var rockAngle = Phaser.Math.Between(0, 80);
-        var strawberryAngle = Phaser.Math.Between(280, 360)
+        var strawberryAngle = Phaser.Math.Between(280, 350)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -280,7 +280,7 @@ class Level6 extends Phaser.Scene {
                         this.score += 10;
                         scoreText.setText('SCORE:' + this.score);
 
-                        
+
                         // is the knife close enough to the apple? And the appls is still to be hit?
                         if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.apple.startAngle)) < gameOptions.minAngle && !this.apple.hit) {
 
