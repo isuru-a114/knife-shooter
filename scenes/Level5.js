@@ -268,13 +268,12 @@ class Level5 extends Phaser.Scene {
                         }
                     }
 
-                    //score
-                    this.score += 10;
-                    scoreText.setText('SCORE:' + this.score);
-
                     // is this a legal hit?
                     if (legalHit) {
-
+                        //score
+                        this.score += 10;
+                        scoreText.setText('SCORE:' + this.score);
+                        
                         // is the knife close enough to the apple? And the appls is still to be hit?
                         if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.apple.startAngle)) < gameOptions.minAngle && !this.apple.hit) {
                             console.log("he he he")
@@ -576,7 +575,7 @@ class Level5 extends Phaser.Scene {
                     }
                     // in case this is not a legal hit
                     else {
-                        if(this.hitknifecount == 0){
+                        if (this.hitknifecount == 0) {
                             this.lastHit = false;
                         }
                         // tween to make the knife fall down
@@ -606,9 +605,9 @@ class Level5 extends Phaser.Scene {
                         });
                     }
                     score = this.score;
-                    if(this.lastHit == false){
+                    if (this.lastHit == false) {
                         console.log("lastHit")
-                    }else if (this.hitknifecount == 0) {
+                    } else if (this.hitknifecount == 0) {
                         this.target.setFrame(1, 2);
                         var slice2 = this.add.sprite(this.target.x, this.target.y, "target", 5);
                         slice2.displayHeight = 153;

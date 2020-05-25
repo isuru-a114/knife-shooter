@@ -278,13 +278,12 @@ class Level13 extends Phaser.Scene {
                         }
                     }
 
-
-                    //score
-                    this.score += 10;
-                    scoreText.setText('SCORE:' + this.score);
-
                     // is this a legal hit?
                     if (legalHit) {
+
+                        //score
+                        this.score += 10;
+                        scoreText.setText('SCORE:' + this.score);
 
                         // is the knife close enough to the apple? And the appls is still to be hit?
                         if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.apple.startAngle)) < gameOptions.minAngle && !this.apple.hit) {
