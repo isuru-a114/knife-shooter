@@ -217,6 +217,17 @@ class Level7 extends Phaser.Scene {
 
             this.hitknifecount--;
 
+            // at the moment, this is a legal hit
+            var legalHit = true;
+
+            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                legalHit = false;
+            })
+
+            this.physics.add.overlap(this.knife, this.rock2, (e) => {
+                legalHit = false;
+            })
+
             // tween to throw the knife
             this.tweens.add({
 
@@ -235,9 +246,6 @@ class Level7 extends Phaser.Scene {
                 // function to be executed once the tween has been completed
                 onComplete: function (tween) {
 
-                    // at the moment, this is a legal hit
-                    var legalHit = true;
-
                     // getting an array with all rotating knives
                     var children = this.knifeGroup.getChildren();
 
@@ -253,19 +261,6 @@ class Level7 extends Phaser.Scene {
                             // no need to continue with the loop
                             break;
                         }
-                    }
-
-                    this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false;
-                    })
-
-                    this.physics.add.overlap(this.knife, this.rock2, (e) => {
-                        this.legal = false;
-                    })
-
-                    console.log(this.legal);
-                    if (this.legal == false) {
-                        legalHit = this.legal;
                     }
 
                     //score
@@ -485,7 +480,7 @@ class Level7 extends Phaser.Scene {
         if (localStorage.getItem('Completed Level') <= 7) {
             localStorage.setItem('Completed Level', 7);
         }
-        
+
         game.globals.level = 8;
         this.scene.start("LevelCompleted");
     }

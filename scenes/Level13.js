@@ -235,6 +235,13 @@ class Level13 extends Phaser.Scene {
 
             this.hitknifecount--;
 
+            // at the moment, this is a legal hit
+            var legalHit = true;
+
+            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                legalHit = false;
+            })
+
             // tween to throw the knife
             this.tweens.add({
 
@@ -253,9 +260,6 @@ class Level13 extends Phaser.Scene {
                 // function to be executed once the tween has been completed
                 onComplete: function (tween) {
 
-                    // at the moment, this is a legal hit
-                    var legalHit = true;
-
                     // getting an array with all rotating knives
                     var children = this.knifeGroup.getChildren();
 
@@ -270,12 +274,6 @@ class Level13 extends Phaser.Scene {
 
                             // no need to continue with the loop
                             break;
-                        } else {
-                            this.physics.add.overlap(this.knife, this.rock, (e) => {
-                                this.legal = false;
-                            })
-
-                            legalHit = this.legal;
                         }
                     }
 
@@ -457,7 +455,7 @@ class Level13 extends Phaser.Scene {
                             });
                         }
 
-                       //for strawberry
+                        //for strawberry
                         // is the knife close enough to the apple? And the appls is still to be hit?
                         if (Math.abs(Phaser.Math.Angle.ShortestBetween(this.target.angle, 180 - this.strawberry.startAngle)) < gameOptions.minAngle && !this.strawberry.hit) {
 
@@ -613,7 +611,7 @@ class Level13 extends Phaser.Scene {
         if (localStorage.getItem('Completed Level') <= 13) {
             localStorage.setItem('Completed Level', 13);
         }
-       
+
         game.globals.level = 14;
         this.scene.start("LevelCompleted");
     }
@@ -683,8 +681,8 @@ class Level13 extends Phaser.Scene {
             this.orange.y = this.target.y + (this.target.width / 2) * Math.sin(radians);
         }
 
-          // if the strawberry has not been hit...
-          if (!this.strawberry.hit) {
+        // if the strawberry has not been hit...
+        if (!this.strawberry.hit) {
 
             // adjusting apple rotation
             this.strawberry.angle += this.currentRotationSpeed;

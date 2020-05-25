@@ -39,6 +39,19 @@ class SelectLevel extends Phaser.Scene {
         }, this);
         //
 
+         //kaiads
+         getKaiAd({
+            publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
+            app: 'Knife shooter',
+            slot: 'knife shooter',
+            onerror: err => console.error('Custom catch:', err),
+            onready: ad => {
+                // Ad is ready to be displayed
+                // calling 'display' will display the ad
+                ad.call('display')
+            }
+        })
+
         //variables
         this.roundlist = new Array();
         this.selectedLevel = parseInt(localStorage.getItem('Completed Level'));

@@ -221,6 +221,13 @@ class Level9 extends Phaser.Scene {
 
             this.hitknifecount--;
 
+            // at the moment, this is a legal hit
+            var legalHit = true;
+
+            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                legalHit = false;
+            })
+
             // tween to throw the knife
             this.tweens.add({
 
@@ -239,9 +246,6 @@ class Level9 extends Phaser.Scene {
                 // function to be executed once the tween has been completed
                 onComplete: function (tween) {
 
-                    // at the moment, this is a legal hit
-                    var legalHit = true;
-
                     // getting an array with all rotating knives
                     var children = this.knifeGroup.getChildren();
 
@@ -256,12 +260,6 @@ class Level9 extends Phaser.Scene {
 
                             // no need to continue with the loop
                             break;
-                        } else {
-                            this.physics.add.overlap(this.knife, this.rock, (e) => {
-                                this.legal = false;
-                            })
-
-                            legalHit = this.legal;
                         }
                     }
 

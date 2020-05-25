@@ -121,9 +121,9 @@ class Level6 extends Phaser.Scene {
         this.target.depth = 1;
 
         // starting apple angle
-        var appleAngle = Phaser.Math.Between(90, 260);
-        var rockAngle = Phaser.Math.Between(0, 90);
-        var strawberryAngle = Phaser.Math.Between(260, 360)
+        var appleAngle = Phaser.Math.Between(100, 260);
+        var rockAngle = Phaser.Math.Between(0, 80);
+        var strawberryAngle = Phaser.Math.Between(280, 360)
 
         // determing apple angle in radians
         var radians = Phaser.Math.DegToRad(appleAngle - 90);
@@ -228,6 +228,13 @@ class Level6 extends Phaser.Scene {
 
             this.hitknifecount--;
 
+            // at the moment, this is a legal hit
+            var legalHit = true;
+
+            this.physics.add.overlap(this.knife, this.rock, (e) => {
+                legalHit = false;
+            })
+
             // tween to throw the knife
             this.tweens.add({
 
@@ -246,14 +253,6 @@ class Level6 extends Phaser.Scene {
                 // function to be executed once the tween has been completed
                 onComplete: function (tween) {
 
-                    // at the moment, this is a legal hit
-                    var legalHit = true;
-
-                    this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false;
-                    })
-
-
                     // getting an array with all rotating knives
                     var children = this.knifeGroup.getChildren();
 
@@ -269,12 +268,6 @@ class Level6 extends Phaser.Scene {
                             // no need to continue with the loop
                             break;
                         }
-                    }
-
-                   
-                    console.log(this.legal);
-                    if (this.legal == false) {
-                        legalHit = this.legal;
                     }
 
                     //score
@@ -496,7 +489,7 @@ class Level6 extends Phaser.Scene {
         if (localStorage.getItem('Completed Level') <= 6) {
             localStorage.setItem('Completed Level', 6);
         }
-        
+
         game.globals.level = 7;
         this.scene.start("LevelCompleted");
     }
