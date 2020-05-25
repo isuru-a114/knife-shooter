@@ -70,7 +70,7 @@ class Menu extends Phaser.Scene {
 
 
         this.input.keyboard.on('keyup', function (e) {
-            if (e.key == "SoftRight") {
+            if (e.key == "SoftRight" || e.key == "BackSpace") {
                 //console.log("soft right key");
                 this.goToContactScene();
 

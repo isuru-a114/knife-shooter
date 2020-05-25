@@ -52,7 +52,7 @@ class ContactScene extends Phaser.Scene {
         this.goBack = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
         this.input.keyboard.on('keyup', function (e) {
-            if (e.key == "SoftRight") {
+            if (e.key == "SoftRight" || e.key == "BackSpace") {
                 //console.log("soft right key");
                 this.goBackScene();
             }
