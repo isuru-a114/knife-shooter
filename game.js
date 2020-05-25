@@ -7,7 +7,7 @@ var game;
 var gameOptions = {
 
     // target rotation speed, in degrees per frame
-    rotationSpeed: 4,
+    rotationSpeed: 3,
 
     // knife throwing duration, in milliseconds
     throwSpeed: 150,
