@@ -125,7 +125,7 @@ class Level12 extends Phaser.Scene {
         // starting apple angle
         var appleAngle = Phaser.Math.Between(180, 240);
         var appleAngle2 = Phaser.Math.Between(0, 20);
-        var pinappleAngle = Phaser.Math.Between(310, 360)
+        var pinappleAngle = Phaser.Math.Between(310, 350)
         var rockAngle = Phaser.Math.Between(250, 300);
         var rockAngle2 = Phaser.Math.Between(35, 70);
         var rockAngle3 = Phaser.Math.Between(70, 90);
