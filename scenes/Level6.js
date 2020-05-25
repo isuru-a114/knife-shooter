@@ -249,6 +249,11 @@ class Level6 extends Phaser.Scene {
                     // at the moment, this is a legal hit
                     var legalHit = true;
 
+                    this.physics.add.overlap(this.knife, this.rock, (e) => {
+                        this.legal = false;
+                    })
+
+
                     // getting an array with all rotating knives
                     var children = this.knifeGroup.getChildren();
 
@@ -266,10 +271,7 @@ class Level6 extends Phaser.Scene {
                         }
                     }
 
-                    this.physics.add.overlap(this.knife, this.rock, (e) => {
-                        this.legal = false;
-                    })
-
+                   
                     console.log(this.legal);
                     if (this.legal == false) {
                         legalHit = this.legal;

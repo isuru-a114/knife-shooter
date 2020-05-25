@@ -238,7 +238,7 @@ class SelectLevel extends Phaser.Scene {
                 //console.log("soft left key");
                 this.callMenuButton();
             }
-            if (e.key == 'Backspace') {
+            if (e.key == "SoftRight") {
                 this.scene.transition({
                     target: 'Menu',
                     moveAbove: true,

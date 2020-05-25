@@ -7,7 +7,7 @@ var game;
 var gameOptions = {
 
     // target rotation speed, in degrees per frame
-    rotationSpeed: 3,
+    rotationSpeed: 4,
 
     // knife throwing duration, in milliseconds
     throwSpeed: 150,
@@ -16,7 +16,7 @@ var gameOptions = {
     minAngle: 15,
 
     // max rotation speed variation, in degrees per frame
-    rotationVariation: 2,
+    rotationVariation: 3,
 
     // interval before next rotation speed variation, in milliseconds
     changeTime: 2000,
@@ -88,7 +88,7 @@ window.onload = function () {
         physics: {
             default: 'arcade',
             arcade: {
-                debug: false,
+                debug: true,
                 gravity: {
                     y: 0 //the game gravity
                 }

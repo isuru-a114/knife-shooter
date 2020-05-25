@@ -1,15 +1,13 @@
 {
   "version": "1.0.0",
-  "name": "Pelota",
+  "name": "Knife Shooter",
   "launch_path": "/index.html",
   "description": "Click to make the ball jump. Pass through the walls when they are the same color.",
   "subtitle": "Make the ball match the wall",
   "type": "web",
   "icons": {
-    "16": "/icons/pelota16.png",
-    "48": "/icons/pelota48.png",
-    "60": "/icons/pelota60.png",
-    "128": "/icons/pelota128.png"
+    "56": "/icons/KnifeShooter48.png",
+    "112": "/icons/KnifeShooter112.png"
   },
   "developer": {
     "name": "Eyepax",
@@ -23,7 +21,8 @@
   ],
   "default_locale": "en-US",
   "categories": [
-    "sports"
+    "sports",
+    "games"
   ],
   "permissions": {
     "desktop-notification": {
@@ -39,7 +38,7 @@
   "fullscreen": "true",
   "locales": {
      "en-US": {
-      "name": "Pelota",
+      "name": "Knife Shooter",
       "subtitle": "Make the ball match the wall",
       "description": "Click to make the ball jump. Pass through the walls when they are the same color."
     }
