@@ -46,18 +46,18 @@ class GameComplete extends Phaser.Scene {
         this.image.displayWidth = game.config.width;
 
        
-         //kaiads
-         getKaiAd({
-            publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
-            app: 'Knife shooter',
-            slot: 'knife shooter',
-            onerror: err => console.error('Custom catch:', err),
-            onready: ad => {
-                // Ad is ready to be displayed
-                // calling 'display' will display the ad
-                ad.call('display')
-            }
-        })
+        //  //kaiads
+        //  getKaiAd({
+        //     publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
+        //     app: 'Knife shooter',
+        //     slot: 'knife shooter',
+        //     onerror: err => console.error('Custom catch:', err),
+        //     onready: ad => {
+        //         // Ad is ready to be displayed
+        //         // calling 'display' will display the ad
+        //         ad.call('display')
+        //     }
+        // })
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "Enter") {
