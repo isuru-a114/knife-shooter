@@ -6,9 +6,11 @@ class HelpScene extends Phaser.Scene {
 
     preload() {
 
-        this.load.image("bgIntro", "assets/img/Instructions.png");
+        this.load.image("bgGamePL", "assets/img/PassLevels.png");
         // this.load.image("bgLevels", "assets/img/levels.png");
         this.load.image("bgGameControls", "assets/img/GameControls.png");
+        this.load.image("bgGameEP", "assets/img/ExtraPoints.png");
+        this.load.image("bgGameFL", "assets/img/FailLevels.png");
     }
 
     create() {
@@ -43,9 +45,9 @@ class HelpScene extends Phaser.Scene {
             }
         }, this);
 
-        this.selected_screen = 'intro';
+        this.selected_screen = 'control';
 
-        this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgIntro');
+        this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameControls');
         this.image.displayHeight = game.config.height;
         this.image.displayWidth = game.config.width;
 
@@ -85,29 +87,27 @@ class HelpScene extends Phaser.Scene {
 
     changeSlidesRight() {
         switch (this.selected_screen) {
-            case "intro":
+            case "control":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameControls');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGamePL');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
-                this.selected_screen = "controls";
+                this.selected_screen = "GamePL";
                 break;
-            // case "controls":
-            //     this.image.destroy();
-            //     this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgLevels');
-            //     this.image.displayHeight = game.config.height;
-            //     this.image.displayWidth = game.config.width;
-            //     this.selected_screen = "level";
-            //     break;
-            case "level":
+            case "GamePL":
                 this.image.destroy();
-                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgIntro');
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameEP');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
-                this.selected_screen = "intro";
+                this.selected_screen = "GameEP";
                 break;
-
-
+            case "GameEP":
+                this.image.destroy();
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameFL');
+                this.image.displayHeight = game.config.height;
+                this.image.displayWidth = game.config.width;
+                this.selected_screen = "GameFL";
+                break;
         }
         //this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
         this.goBack = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
@@ -115,27 +115,34 @@ class HelpScene extends Phaser.Scene {
 
     changeSlidesLeft() {
         switch (this.selected_screen) {
-            // case "intro":
-            //     this.image.destroy();
-            //     this.image = this.add.image(game.config.width/2, game.config.height/2, 'bgLevels');
-            //     this.image.displayHeight = game.config.height;
-            //     this.image.displayWidth = game.config.width;
-            //     this.selected_screen = "level";
-            //     break;
-            case "level":
+            case "GameFL":
+                this.image.destroy();
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameEP');
+                this.image.displayHeight = game.config.height;
+                this.image.displayWidth = game.config.width;
+                this.selected_screen = "GameEP";
+                break;
+            case "GameEP":
+                this.image.destroy();
+                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGamePL');
+                this.image.displayHeight = game.config.height;
+                this.image.displayWidth = game.config.width;
+                this.selected_screen = "GamePL";
+                break;
+            case "GamePL":
                 this.image.destroy();
                 this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGameControls');
                 this.image.displayHeight = game.config.height;
                 this.image.displayWidth = game.config.width;
-                this.selected_screen = "controls";
+                this.selected_screen = "control";
                 break;
-            case "controls":
-                this.image.destroy();
-                this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgIntro');
-                this.image.displayHeight = game.config.height;
-                this.image.displayWidth = game.config.width;
-                this.selected_screen = "intro";
-                break;
+            // case "control":
+            //     this.image.destroy();
+            //     this.image = this.add.image(game.config.width / 2, game.config.height / 2, 'bgGamePL');
+            //     this.image.displayHeight = game.config.height;
+            //     this.image.displayWidth = game.config.width;
+            //     this.selected_screen = "GamePL";
+            //     break;
         }
         // this.skip = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Skip").setFontSize(50).setFontFamily("Arial").setOrigin(0.5);
         this.goBackbtn = this.add.text(game.config.width - game.config.width * 8 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);

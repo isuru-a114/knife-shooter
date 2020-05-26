@@ -42,7 +42,7 @@ class SelectLevel extends Phaser.Scene {
         //variables
         this.roundlist = new Array();
         this.selectedLevel = parseInt(localStorage.getItem('Completed Level'));
-        if(localStorage.getItem('Completed Level') == null){
+        if (localStorage.getItem('Completed Level') == null) {
             this.selectedLevel = 0;
         }
 
@@ -238,7 +238,7 @@ class SelectLevel extends Phaser.Scene {
                 //console.log("soft left key");
                 this.callMenuButton();
             }
-            if (e.key == "SoftRight") {
+            if (e.key == "SoftRight" || e.key == "Backspace") {
                 this.scene.transition({
                     target: 'Menu',
                     moveAbove: true,
