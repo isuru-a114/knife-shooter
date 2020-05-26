@@ -57,7 +57,7 @@ class IntroductionScene extends Phaser.Scene {
     }
 
     setValueToLocalStorage() {
-        localStorage.setItem('isFirstTime', "yes");
+        localStorage.setItem('KS isFirstTime', "yes");
     }
 
     update() {

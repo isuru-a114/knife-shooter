@@ -54,9 +54,9 @@ class ScoreScene extends Phaser.Scene {
             }
         }, this);
 
-        var HighScore = localStorage.getItem('Best Score') || 0;
-        var ScondHighScore = localStorage.getItem('Second Best Score') || 0;
-        var ThirdHighScore = localStorage.getItem('Third Best Score') || 0;
+        var HighScore = localStorage.getItem('KS Best Score') || 0;
+        var ScondHighScore = localStorage.getItem('KS Second Best Score') || 0;
+        var ThirdHighScore = localStorage.getItem('KS Third Best Score') || 0;
 
         //console.log(HighScore +"  "+ScondHighScore+"  "+ThirdHighScore);
 
