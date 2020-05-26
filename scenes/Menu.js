@@ -28,7 +28,7 @@ class Menu extends Phaser.Scene {
     }
 
     create() {
-
+        localStorage.setItem('KS isFirstTime',"yes")
         //
         this.events.on('transitionstart', function (fromScene, duration) {
             this.cameras.main.setZoom(0.001);
