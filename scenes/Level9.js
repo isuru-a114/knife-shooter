@@ -101,7 +101,7 @@ class Level9 extends Phaser.Scene {
 
         // at the beginning of the game, both current rotation speed and new rotation speed are set to default rotation speed
         this.currentRotationSpeed = gameOptions.rotationSpeed;
-        this.input.on("pointerdown", this.throwKnife, this);
+        this.newRotationSpeed = gameOptions.rotationSpeed;
 
         // can the player throw a knife? Yes, at the beginning of the game
         this.canThrow = true;
@@ -168,7 +168,7 @@ class Level9 extends Phaser.Scene {
 
         // waiting for player input to throw a knife
         this.input.keyboard.on("keyup_ENTER", this.throwKnife, this);
-        // this.input.on("pointerdown", this.throwKnife, this);
+        this.input.on("pointerdown", this.throwKnife, this);
 
         // this is how we create a looped timer event
         var timedEvent = this.time.addEvent({
