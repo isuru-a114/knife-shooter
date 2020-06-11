@@ -34,17 +34,17 @@ class ScoreScene extends Phaser.Scene {
         //
 
         //kaiads
-        getKaiAd({
-            publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
-            app: 'Knife shooter',
-            slot: 'knife shooter',
-            onerror: err => console.error('Custom catch:', err),
-            onready: ad => {
-                // Ad is ready to be displayed
-                // calling 'display' will display the ad
-                ad.call('display')
-            }
-        })
+        // getKaiAd({
+        //     publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
+        //     app: 'Knife shooter',
+        //     slot: 'knife shooter',
+        //     onerror: err => console.error('Custom catch:', err),
+        //     onready: ad => {
+        //         // Ad is ready to be displayed
+        //         // calling 'display' will display the ad
+        //         ad.call('display')
+        //     }
+        // })
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "SoftRight" || e.key == "Backspace") {
@@ -87,11 +87,19 @@ class ScoreScene extends Phaser.Scene {
         }
         this.about = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
         // this.back_space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.BACKSPACE);
+        //touchable
+        this.about.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+            this.scene.transition({
+                target: "Menu",
+                moveAbove: true,
+                duration: 300,
+            })
+        });
     }
 
     // method to be called at each frame
     update() {
-       
+
     }
 
     goBackScene() {

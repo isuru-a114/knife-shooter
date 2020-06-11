@@ -216,19 +216,27 @@ class SelectLevel extends Phaser.Scene {
         ///////
         this.back = this.add.text(game.config.width - game.config.width * 10 / 100, game.config.height - game.config.height * 5 / 100, "Back").setFontSize(30).setFontFamily("Arial").setOrigin(0.5);
 
+        this.back.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+            this.scene.transition({
+                target: "Menu",
+                moveAbove: true,
+                duration: 300,
+            })
+        });
         ///////
-        console.log(localStorage.getItem('Completed Level'));
+
         for (var i = 0; i <= parseInt(localStorage.getItem('Completed Level')); i++) {
+            this.roundlist[i].indexNum = i;
             if (i == 0) {
                 continue;
             }
+
             this.roundlist[i].setTint(0xffa500);
             this.roundlist[i].isLocked = false;
             if (i == parseInt(localStorage.getItem('Completed Level'))) {
-                console.log(i)
                 this.roundlist[i].setTint(0x00FF00);
             }
-            console.log(this.roundlist[i])
+
         };
 
         //////
@@ -246,6 +254,172 @@ class SelectLevel extends Phaser.Scene {
                 })
             }
         }, this);
+
+        console.log(this.roundlist)
+
+        // for touch screen
+        // for(var i = 0; i < 15; i++){
+        //     if (this.roundlist[i].isLocked == false) {
+        //         this.roundlist[i].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+        //             this.scene.transition({
+        //                 target: "Level" + (this.roundlist[i].indexNum+1),
+        //                 moveAbove: true,
+        //                 duration: 300,
+        //             })
+        //         });
+        //     }
+        // }
+
+        if (this.not_comple_round1.isLocked == false) {
+            this.not_comple_round1.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level1",
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[1].isLocked == false) {
+            this.roundlist[1].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[1].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[2].isLocked == false) {
+            this.roundlist[2].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[2].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[3].isLocked == false) {
+            this.roundlist[3].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[3].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[4].isLocked == false) {
+            this.roundlist[4].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[4].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[5].isLocked == false) {
+            this.roundlist[5].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[5].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[6].isLocked == false) {
+            this.roundlist[6].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[6].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[7].isLocked == false) {
+            this.roundlist[7].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[7].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[8].isLocked == false) {
+            this.roundlist[8].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[8].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[9].isLocked == false) {
+            this.roundlist[9].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[9].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[10].isLocked == false) {
+            this.roundlist[10].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[10].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[11].isLocked == false) {
+            this.roundlist[11].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[11].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[12].isLocked == false) {
+            this.roundlist[12].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[12].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[13].isLocked == false) {
+            this.roundlist[13].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[13].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
+        if (this.roundlist[14].isLocked == false) {
+            this.roundlist[14].setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+                this.scene.transition({
+                    target: "Level" + (this.roundlist[14].indexNum + 1),
+                    moveAbove: true,
+                    duration: 300,
+                })
+            });
+        }
+
     }
 
     update() {

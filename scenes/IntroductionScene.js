@@ -61,7 +61,23 @@ class IntroductionScene extends Phaser.Scene {
         this.left_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right_arrow = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
+        //touchable
+        this.goBack.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+            this.scene.transition({
+                target: "Menu",
+                moveAbove: true,
+                duration: 300,
+            })
+        });
 
+        this.input.on("pointerdown", (pointer) => {
+            if (pointer.x < 120) {
+                this.changeSlidesLeft()
+            } else {
+                this.changeSlidesRight()
+            }
+
+        }, this);
 
     }
 

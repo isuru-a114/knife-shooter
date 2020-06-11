@@ -47,17 +47,17 @@ class GameComplete extends Phaser.Scene {
 
        
          //kaiads
-         getKaiAd({
-            publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
-            app: 'Knife shooter',
-            slot: 'knife shooter',
-            onerror: err => console.error('Custom catch:', err),
-            onready: ad => {
-                // Ad is ready to be displayed
-                // calling 'display' will display the ad
-                ad.call('display')
-            }
-        })
+        //  getKaiAd({
+        //     publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
+        //     app: 'Knife shooter',
+        //     slot: 'knife shooter',
+        //     onerror: err => console.error('Custom catch:', err),
+        //     onready: ad => {
+        //         // Ad is ready to be displayed
+        //         // calling 'display' will display the ad
+        //         ad.call('display')
+        //     }
+        // })
 
         this.input.keyboard.on('keyup', function (e) {
             if (e.key == "Enter") {
@@ -74,6 +74,14 @@ class GameComplete extends Phaser.Scene {
         this.btn_exit = this.add.sprite(game.config.width / 2, (game.config.height / 6) * 5.2, 'btn_mainmanu', 0).setInteractive();
         this.btn_exit.displayHeight = game.config.height / 8.9;
         this.btn_exit.displayWidth = game.config.width / 2.3;
+
+        this.btn_exit.setInteractive().on('pointerdown', (pointer, localX, localY, event) => {
+            this.scene.transition({
+              target: "Menu",
+              moveAbove: true,
+              duration: 300,
+            })
+          });
 
     }
 

@@ -180,7 +180,7 @@ class Level13 extends Phaser.Scene {
 
         // waiting for player input to throw a knife
         this.input.keyboard.on("keyup_ENTER", this.throwKnife, this);
-        // this.input.on("pointerdown", this.throwKnife, this);
+        this.input.on("pointerdown", this.throwKnife, this);
 
         // this is how we create a looped timer event
         var timedEvent = this.time.addEvent({
