@@ -134,6 +134,9 @@ class Level6 extends Phaser.Scene {
         this.rock = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
         this.strawberry = this.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "strawberry");
 
+        //rock collide size change
+        this.rock.setSize(game.config.height / 25, game.config.width / 10, true)
+
         // setting apple's anchor point to bottom center
         this.apple.setOrigin(0.5, 1);
         this.rock.setOrigin(0.5, 1);

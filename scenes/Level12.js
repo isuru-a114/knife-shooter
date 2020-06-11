@@ -142,6 +142,10 @@ class Level12 extends Phaser.Scene {
         this.rock2 = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
         this.rock3 = this.physics.add.sprite(this.target.x + (this.target.width / 2) * Math.cos(radians), this.target.y + (this.target.width / 2) * Math.sin(radians), "rock");
 
+        this.rock.setSize(game.config.height / 25, game.config.width / 10, true)
+        this.rock2.setSize(game.config.height / 25, game.config.width / 10, true)
+        this.rock3.setSize(game.config.height / 25, game.config.width / 10, true)
+
         // setting apple's anchor point to bottom center
         this.apple.setOrigin(0.5, 1);
         this.apple2.setOrigin(0.5, 1);

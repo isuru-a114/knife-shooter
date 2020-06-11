@@ -126,8 +126,12 @@ class LevelCompleted extends Phaser.Scene {
             localStorage.setItem('KS Second Best Score', localStorage.getItem('KS Best Score'));
             localStorage.setItem('KS Best Score', score);
             this.bestScore.setText(localStorage.getItem('KS Best Score'));
+        } else if ((localStorage.getItem('KS Best Score') > score && score >= localStorage.getItem('KS Second Best Score')) || localStorage.getItem('KS Second Best Score') == 'null') {
+            localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
+            localStorage.setItem('KS Second Best Score', score);
+        } else if ((localStorage.getItem('KS Second Best Score') > score && score >= localStorage.getItem('KS Third Best Score')) || localStorage.getItem('KS Third Best Score') == 'null') {
+            localStorage.setItem('KS Third Best Score', score);
         }
-
         // Click to play text
         // this.text_click_to_play = this.add.text(this.CONFIG.centerX/4, this.CONFIG.centerY+80, 'Click to Play');
         // this.text_click_to_play.setColor('#FFF');
