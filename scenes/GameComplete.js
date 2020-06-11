@@ -46,24 +46,6 @@ class GameComplete extends Phaser.Scene {
         this.image.displayWidth = game.config.width;
 
 
-        if (localStorage.getItem('KS Best Score') === null) {
-            this.bestScore.setText(0);
-        } else {
-            this.bestScore.setText(localStorage.getItem('KS Best Score'));
-        }
-
-        if (score > localStorage.getItem('KS Best Score')) {
-            localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
-            localStorage.setItem('KS Second Best Score', localStorage.getItem('KS Best Score'));
-            localStorage.setItem('KS Best Score', score);
-            this.bestScore.setText(localStorage.getItem('KS Best Score'));
-        } else if ((localStorage.getItem('KS Best Score') > score && score >= localStorage.getItem('KS Second Best Score')) || localStorage.getItem('KS Second Best Score') == 'null') {
-            localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
-            localStorage.setItem('KS Second Best Score', score);
-        } else if ((localStorage.getItem('KS Second Best Score') > score && score >= localStorage.getItem('KS Third Best Score')) || localStorage.getItem('KS Third Best Score') == 'null') {
-            localStorage.setItem('KS Third Best Score', score);
-        }
-
         //kaiads
         //  getKaiAd({
         //     publisher: 'ca24f2d0-de89-4c1a-80c4-51e14d317000',
@@ -100,6 +82,24 @@ class GameComplete extends Phaser.Scene {
                 duration: 300,
             })
         });
+
+        if (localStorage.getItem('KS Best Score') === null) {
+            this.bestScore.setText(0);
+        } else {
+            this.bestScore.setText(localStorage.getItem('KS Best Score'));
+        }
+
+        if (score > localStorage.getItem('KS Best Score')) {
+            localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
+            localStorage.setItem('KS Second Best Score', localStorage.getItem('KS Best Score'));
+            localStorage.setItem('KS Best Score', score);
+            this.bestScore.setText(localStorage.getItem('KS Best Score'));
+        } else if ((localStorage.getItem('KS Best Score') > score && score >= localStorage.getItem('KS Second Best Score')) || localStorage.getItem('KS Second Best Score') == 'null') {
+            localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
+            localStorage.setItem('KS Second Best Score', score);
+        } else if ((localStorage.getItem('KS Second Best Score') > score && score >= localStorage.getItem('KS Third Best Score')) || localStorage.getItem('KS Third Best Score') == 'null') {
+            localStorage.setItem('KS Third Best Score', score);
+        }
 
     }
 
