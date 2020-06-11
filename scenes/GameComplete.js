@@ -83,12 +83,6 @@ class GameComplete extends Phaser.Scene {
             })
         });
 
-        if (localStorage.getItem('KS Best Score') === null) {
-            this.bestScore.setText(0);
-        } else {
-            this.bestScore.setText(localStorage.getItem('KS Best Score'));
-        }
-
         if (score > localStorage.getItem('KS Best Score')) {
             localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
             localStorage.setItem('KS Second Best Score', localStorage.getItem('KS Best Score'));
