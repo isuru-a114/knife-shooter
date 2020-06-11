@@ -125,7 +125,7 @@ class Level10 extends Phaser.Scene {
         var appleAngle2 = Phaser.Math.Between(240, 300);
         var orangeAngle = Phaser.Math.Between(310, 350);
         var rockAngle = Phaser.Math.Between(0, 70);
-        var rockAngle2 = Phaser.Math.Between(100, 160);
+        var rockAngle2 = Phaser.Math.Between(100, 140);
 
 
         // determing apple angle in radians
