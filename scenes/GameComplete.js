@@ -93,7 +93,6 @@ class GameComplete extends Phaser.Scene {
             localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
             localStorage.setItem('KS Second Best Score', localStorage.getItem('KS Best Score'));
             localStorage.setItem('KS Best Score', score);
-            this.bestScore.setText(localStorage.getItem('KS Best Score'));
         } else if ((localStorage.getItem('KS Best Score') > score && score >= localStorage.getItem('KS Second Best Score')) || localStorage.getItem('KS Second Best Score') == 'null') {
             localStorage.setItem('KS Third Best Score', localStorage.getItem('KS Second Best Score'));
             localStorage.setItem('KS Second Best Score', score);
